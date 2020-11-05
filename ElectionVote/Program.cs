@@ -1,4 +1,5 @@
 ﻿using System;
+using ElectionVote.Services;
 
 namespace ElectionVote
 {
@@ -6,7 +7,13 @@ namespace ElectionVote
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Making a request!");
+
+            HttpRequest.Request();
+
+            String input = Console.ReadLine();
+
+            Console.WriteLine(input);
         }
     }
 }
