@@ -37,9 +37,21 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\HttpRequest.cs" />
+    <Compile Include="Services\Auth.cs" />
+    <Compile Include="Services\Constants\API.cs" />
+    <Compile Include="Services\DTO\CreateUserResponseDto.cs" />
+    <Compile Include="Services\Models\Core\User.cs" />
+    <Compile Include="Services\Enums\UserType.cs" />
+    <Compile Include="Services\DTO\IResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
+    <Folder Include="Services\Constants\" />
+    <Folder Include="Services\Models\" />
+    <Folder Include="Services\DTO\" />
+    <Folder Include="Services\Models\Core\" />
+    <Folder Include="Services\Models\Embedded\" />
+    <Folder Include="Services\Enums\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
