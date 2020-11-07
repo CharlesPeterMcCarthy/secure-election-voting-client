@@ -37,7 +37,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\HttpRequest.cs" />
-    <Compile Include="Services\Auth.cs" />
     <Compile Include="Services\Constants\API.cs" />
     <Compile Include="Services\Models\Core\User.cs" />
     <Compile Include="Services\Enums\UserType.cs" />
@@ -47,7 +46,14 @@
     <Compile Include="Services\DTO\Request\IRequest.cs" />
     <Compile Include="Services\DTO\Response\GetUserResponseDto.cs" />
     <Compile Include="Services\Interactions\AuthFlow.cs" />
-    <Compile Include="Services\Interactions\OptionsFlow.cs" />
+    <Compile Include="Services\Interactions\Options\OptionsFlow.cs" />
+    <Compile Include="Services\Interactions\Options\RegistrationOptionsFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\RegisterForElectionFlow.cs" />
+    <Compile Include="Services\DTO\Response\GetElectionsResponseDto.cs" />
+    <Compile Include="Services\Models\Core\Election.cs" />
+    <Compile Include="Services\Actions\Auth.cs" />
+    <Compile Include="Services\Actions\Elections.cs" />
+    <Compile Include="Services\DTO\Request\RegisterForElectionRequestDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -60,6 +66,9 @@
     <Folder Include="Services\DTO\Response\" />
     <Folder Include="Services\DTO\Request\" />
     <Folder Include="Services\Interactions\" />
+    <Folder Include="Services\Interactions\Options\" />
+    <Folder Include="Services\Interactions\Tasks\" />
+    <Folder Include="Services\Actions\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

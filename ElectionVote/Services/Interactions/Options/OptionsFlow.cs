@@ -1,8 +1,10 @@
 ﻿using System;
-namespace ElectionVote.Services.Interactions {
+using System.Threading.Tasks;
+
+namespace ElectionVote.Services.Interactions.Options {
     public static class OptionsFlow {
 
-        public static void Interact() {
+        public static async Task InteractAsync() {
             int optionSectionVal = 0;
 
             do {
@@ -18,7 +20,6 @@ namespace ElectionVote.Services.Interactions {
                     InvalidValueWarning();
                     continue;
                 }
-
             } while (optionSectionVal < 1 || optionSectionVal > 3);
 
             Console.Clear();
@@ -27,6 +28,7 @@ namespace ElectionVote.Services.Interactions {
                 case 1: // Elecctions
                     break;
                 case 2: // Registrations
+                    await RegistrationOptionsFlow.InteractAsync();
                     break;
                 case 3: // My Account
                     break;
