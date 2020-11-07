@@ -3,22 +3,19 @@ using System.Threading.Tasks;
 using ElectionVote.Services.Interactions.Tasks;
 
 namespace ElectionVote.Services.Interactions.Options {
-    public static class ElectionOptionsFlow {
+    public static class CandidateOptionsFlow {
 
         public static async Task Interact() {
             int optionVal = 0;
 
-            Console.WriteLine("------ Elections ------");
+            Console.WriteLine("------ Candidates ------");
 
             do {
-                Console.WriteLine("What election option would you like?");
+                Console.WriteLine("What candidate option would you like?");
                 Console.WriteLine("Options:");
-                Console.WriteLine("1) View All Elections");
-                Console.WriteLine("2) View Upcoming Elections I've Registered For");
-                Console.WriteLine("3) Start Election");
-                Console.WriteLine("4) Stop Election");
-                Console.WriteLine("5) Update Election");
-                Console.WriteLine("6) Delete Election");
+                Console.WriteLine("1) Add Candidate To Election");
+                Console.WriteLine("2) Update Candidate");
+                Console.WriteLine("2) Delete Candidate");
 
                 try {
                     optionVal = int.Parse(Console.ReadLine());
@@ -26,16 +23,17 @@ namespace ElectionVote.Services.Interactions.Options {
                     InvalidValueWarning();
                     continue;
                 }
-            } while (optionVal < 1 || optionVal > 2);
+            } while (optionVal < 1 || optionVal > 3);
 
             Console.Clear();
 
             switch (optionVal) {
-                case 1: // View Elections
-                    await ViewElectionsFlow.Interact();
+                case 1: // Add Candidate To Election
+                    await AddCandidateToElectionFlow.Interact();
                     break;
-                case 2: // View Registered Elections
-                    await ViewRegisteredElectionsFlow.Interact();
+                case 2: // Update Candidate
+                    break;
+                case 3: // Delete Candidate
                     break;
                 default:
                     InvalidValueWarning();
@@ -46,5 +44,6 @@ namespace ElectionVote.Services.Interactions.Options {
         private static void InvalidValueWarning() {
             Console.WriteLine("You entered an invalid value!\n");
         }
+
     }
 }

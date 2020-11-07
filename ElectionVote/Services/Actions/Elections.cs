@@ -16,7 +16,6 @@ namespace ElectionVote.Services.Actions {
 
             try {
                 String response = await HttpRequest.Post(API.BASE_URL + "/election/register", dto);
-                Console.WriteLine(response);
 
                 RegisterForElectionResponseDto repsonseObj = JsonConvert.DeserializeObject<RegisterForElectionResponseDto>(response);
 

@@ -61,6 +61,11 @@
     <Compile Include="Services\Interactions\Options\ElectionOptionsFlow.cs" />
     <Compile Include="Services\Interactions\Tasks\ViewElectionsFlow.cs" />
     <Compile Include="Services\Interactions\Tasks\ViewRegisteredElectionsFlow.cs" />
+    <Compile Include="Services\Interactions\Options\CandidateOptionsFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\AddCandidateToElectionFlow.cs" />
+    <Compile Include="Services\Actions\Candidates.cs" />
+    <Compile Include="Services\DTO\Request\CreateCandidateRequestDto.cs" />
+    <Compile Include="Services\DTO\Response\CreateCandidateResponseDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

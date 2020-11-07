@@ -32,6 +32,7 @@ namespace ElectionVote.Services.Interactions.Tasks {
                 Console.WriteLine(e);
                 Console.WriteLine("Unable to get elections");
             }
+            Console.Read();
         }
 
         private static async Task RegisterForElection(List<Election> elections) {
@@ -59,6 +60,12 @@ namespace ElectionVote.Services.Interactions.Tasks {
                 Console.WriteLine($"Registering for {selectedEelection.ElectionName}");
 
                 bool registered = await Elections.RegisterForElection(CurrentUser.UserID, selectedEelection.ElectionId);
+
+                if (registered) {
+                    Console.WriteLine($"You have successfully registered for \"{selectedEelection.ElectionName}\"!");
+                } else {
+                    Console.WriteLine($"Failed to register for \"{selectedEelection.ElectionName}\".");
+                }
             } while (electionVal < 1 || electionVal > elections.Count);
         }
 
