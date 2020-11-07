@@ -16,8 +16,7 @@ namespace ElectionVote.Services.Interactions.Tasks {
             Console.WriteLine("Which election would you like to register for?");
 
             try {
-                Console.WriteLine(API.BASE_URL + "/election/all-unregistered/" + "c47962a6-283f-41ef-b929-6da771cb39ae");
-                String response = await HttpRequest.Get(API.BASE_URL + "/election/all-unregistered/" + "c47962a6-283f-41ef-b929-6da771cb39ae");
+                String response = await HttpRequest.Get($"{API.BASE_URL}/election/all-unregistered/{CurrentUser.UserID}");
                 GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
 
                 if (!repsonseObj.Success) throw new Exception("Failed to retrieve elections");
@@ -25,22 +24,7 @@ namespace ElectionVote.Services.Interactions.Tasks {
                 List<Election> elections = repsonseObj.Elections;
 
                 if (elections.Count > 0) {
-                    PrintElections(repsonseObj.Elections);
-                    Console.Write("\nEnter election number: ");
-
-                    int electionVal = 0;
-                    try {
-                        electionVal = int.Parse(Console.ReadLine());
-                    } catch (FormatException) {
-                        InvalidValueWarning();
-                        //continue;
-                    }
-
-                    Election selectedEelection = elections[electionVal - 1];
-
-                    Console.WriteLine($"Registering for {selectedEelection.ElectionName}");
-
-                    await Elections.RegisterForElection("testid", selectedEelection.ElectionId);
+                    await RegisterForElection(elections);
                 } else {
                     Console.WriteLine("There are no elections to register for.");
                 }
@@ -49,6 +33,34 @@ namespace ElectionVote.Services.Interactions.Tasks {
                 Console.WriteLine("Unable to get elections");
             }
             Console.Read();
+        }
+
+        private static async Task RegisterForElection(List<Election> elections) {
+            int electionVal = 0;
+
+            do {
+                Console.Clear();
+                Console.WriteLine("------ Election Registration ------");
+
+                PrintElections(elections);
+
+                Console.Write("\nEnter election number: ");
+
+                try {
+                    electionVal = int.Parse(Console.ReadLine());
+                } catch (FormatException) {
+                    InvalidValueWarning();
+                    continue;
+                }
+
+                if (electionVal < 1 || electionVal > elections.Count) continue;
+
+                Election selectedEelection = elections[electionVal - 1];
+
+                Console.WriteLine($"Registering for {selectedEelection.ElectionName}");
+
+                bool registered = await Elections.RegisterForElection(CurrentUser.UserID, selectedEelection.ElectionId);
+            } while (electionVal < 1 || electionVal > elections.Count);
         }
 
         private static void PrintElections(List<Election> elections) {

@@ -57,6 +57,7 @@
     <Compile Include="Services\DTO\Response\RegisterForElectionResponseDto.cs" />
     <Compile Include="Services\Models\Core\BallotPaper.cs" />
     <Compile Include="Services\Models\Core\Candidate.cs" />
+    <Compile Include="Services\CurrentUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

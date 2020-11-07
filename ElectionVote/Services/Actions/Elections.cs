@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace ElectionVote.Services.Actions {
     public static class Elections {
 
-        public static async Task RegisterForElection(String userId, String electionId) {
+        public static async Task<bool> RegisterForElection(String userId, String electionId) {
             RegisterForElectionRequestDto dto = new RegisterForElectionRequestDto() {
                 UserId = userId,
                 ElectionId = electionId
@@ -22,10 +22,10 @@ namespace ElectionVote.Services.Actions {
 
                 if (!repsonseObj.Success) throw new Exception("Failed to register for election");
 
-                //return repsonseObj.User;
+                return true;
             } catch (Exception e) {
                 Console.WriteLine("Unable to register for election");
-                //return null;
+                return false;
             }
 
         }
