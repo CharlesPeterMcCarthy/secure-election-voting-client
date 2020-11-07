@@ -39,10 +39,13 @@
     <Compile Include="Services\HttpRequest.cs" />
     <Compile Include="Services\Auth.cs" />
     <Compile Include="Services\Constants\API.cs" />
-    <Compile Include="Services\DTO\CreateUserResponseDto.cs" />
     <Compile Include="Services\Models\Core\User.cs" />
     <Compile Include="Services\Enums\UserType.cs" />
     <Compile Include="Services\DTO\IResponse.cs" />
+    <Compile Include="Services\DTO\Response\CreateUserResponseDto.cs" />
+    <Compile Include="Services\DTO\Request\CreateUserRequestDto.cs" />
+    <Compile Include="Services\DTO\Request\IRequest.cs" />
+    <Compile Include="Services\DTO\Response\GetUserResponseDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -52,6 +55,8 @@
     <Folder Include="Services\Models\Core\" />
     <Folder Include="Services\Models\Embedded\" />
     <Folder Include="Services\Enums\" />
+    <Folder Include="Services\DTO\Response\" />
+    <Folder Include="Services\DTO\Request\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,9 +1,8 @@
 ﻿using System;
-using ElectionVote.Services.Enums;
 using Newtonsoft.Json;
 
-namespace ElectionVote.Services.Models {
-    public class User {
+namespace ElectionVote.Services.DTO.Request {
+    public class CreateUserRequestDto : IRequest {
 
         [JsonProperty("firstName")]
         public String FirstName { get; set; }
@@ -14,14 +13,8 @@ namespace ElectionVote.Services.Models {
         [JsonProperty("email")]
         public String Email { get; set; }
 
-        [JsonProperty("userId")]
-        public String UserId { get; set; }
-
         [JsonProperty("userType")]
-        public UserType UserType { get; set; }
-
-        [JsonProperty("times")]
-        public object Times { get; set; }
+        public String UserType { get; set; }
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ElectionVote.Services;
+using ElectionVote.Services.Enums;
 using ElectionVote.Services.Models;
 
 namespace ElectionVote {
@@ -39,16 +40,17 @@ namespace ElectionVote {
             //    Console.WriteLine(user.firstName);
             //}
 
-            User user = await Auth.SignUp("TEST", "mcc", "fsefdf", "VOTER");
+            User user = await Auth.SignUp("Charles", "mcc", "test@test.com", UserType.VOTER);
+            //User user = await Auth.Login("test@test.com");
 
-            Console.WriteLine(user);
-            Console.WriteLine(user.FirstName);
-            Console.WriteLine(user.LastName);
-            Console.WriteLine(user.Email);
-            Console.WriteLine(user.UserType);
-            Console.WriteLine(user.Times);
-
-
+            if (user != null) {
+                Console.WriteLine(user);
+                Console.WriteLine(user.FirstName);
+                Console.WriteLine(user.LastName);
+                Console.WriteLine(user.Email);
+                Console.WriteLine(user.UserType);
+                Console.WriteLine(user.Times);
+            }
 
         }
     }

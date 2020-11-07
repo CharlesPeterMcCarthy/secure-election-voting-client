@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElectionVote.Services.Constants;
-using ElectionVote.Services.DTO;
+using ElectionVote.Services.DTO.Request;
+using ElectionVote.Services.DTO.Response;
+using ElectionVote.Services.Enums;
 using ElectionVote.Services.Models;
 using Newtonsoft.Json;
 
@@ -10,20 +12,43 @@ namespace ElectionVote.Services {
 
     public static class Auth {
 
-        public static async Task<User> SignUp(String firstName, String lastName, String email, String userType) {
-            Dictionary<String, String> userDetails = new Dictionary<String, String> {
-                    { "firstName", firstName },
-                    { "lastName", lastName },
-                    { "email", email },
-                    { "userType", userType }
-                };
+        public static async Task<User> SignUp(String firstName, String lastName, String email, UserType userType) {
+            CreateUserRequestDto dto = new CreateUserRequestDto() {
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                UserType = userType.ToString()
+            };
 
-            String response = await HttpRequest.Post(API.BASE_URL + "/user", userDetails);
-            CreateUserResponseDto repsonseObj = JsonConvert.DeserializeObject<CreateUserResponseDto>(response);
+            try {
+                String response = await HttpRequest.Post(API.BASE_URL + "/user", dto);
+                CreateUserResponseDto repsonseObj = JsonConvert.DeserializeObject<CreateUserResponseDto>(response);
 
-            if (!repsonseObj.Success) throw new Exception("Failed to create user");
+                if (!repsonseObj.Success) throw new Exception("Failed to create user");
 
-            return repsonseObj.User;
+                return repsonseObj.User;
+            } catch (Exception e) {
+                Console.WriteLine("Unable to sign up - An error occurred");
+                return null;
+            }
+        }
+
+        public static async Task<User> Login(String email) {
+            try {
+                String response = await HttpRequest.Get(API.BASE_URL + "/user/by-email/" + email);
+
+                Console.WriteLine(response);
+
+                GetUserResponseDto repsonseObj = JsonConvert.DeserializeObject<GetUserResponseDto>(response);
+
+                if (!repsonseObj.Success) throw new Exception("Failed to create user");
+                else Console.WriteLine("Unable to find user / login");
+
+                return repsonseObj.User;
+            } catch (Exception e) {
+                Console.WriteLine("Unable to find user / login - An error occurred");
+                return null;
+            }
         }
 
     }
