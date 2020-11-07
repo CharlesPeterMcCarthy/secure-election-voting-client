@@ -32,6 +32,7 @@ namespace ElectionVote.Services.Interactions.Options {
                     await AddCandidateToElectionFlow.Interact();
                     break;
                 case 2: // Update Candidate
+                    await UpdateCandidateFlow.Interact();
                     break;
                 case 3: // Delete Candidate
                     await DeleteCandidateFlow.Interact();

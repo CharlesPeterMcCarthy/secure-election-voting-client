@@ -67,6 +67,10 @@
     <Compile Include="Services\DTO\Request\CreateCandidateRequestDto.cs" />
     <Compile Include="Services\DTO\Response\CreateCandidateResponseDto.cs" />
     <Compile Include="Services\Interactions\Tasks\DeleteCandidateFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\UpdateCandidateFlow.cs" />
+    <Compile Include="Services\DTO\Request\UpdateCandidateRequestDto.cs" />
+    <Compile Include="Services\Models\IUpdatable.cs" />
+    <Compile Include="Services\DTO\Response\UpdateCandidateResponseDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
