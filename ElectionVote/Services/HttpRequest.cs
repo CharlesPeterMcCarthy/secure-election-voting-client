@@ -44,5 +44,18 @@ namespace ElectionVote.Services {
 
             return responseString;
         }
+
+        public static async Task<String> Delete(String url) {
+            HttpResponseMessage response;
+
+            response = await client.DeleteAsync(url);
+
+            response.EnsureSuccessStatusCode();
+
+            string responseString = await response.Content.ReadAsStringAsync();
+            var responseObject = JsonConvert.DeserializeObject<dynamic>(responseString);
+
+            return responseString;
+        }
     }
 }

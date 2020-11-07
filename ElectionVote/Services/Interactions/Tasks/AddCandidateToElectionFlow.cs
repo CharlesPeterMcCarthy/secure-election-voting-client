@@ -22,7 +22,10 @@ namespace ElectionVote.Services.Interactions.Tasks {
                     PrintElections(elections);
                     Election selectedElection = GetSelectedElection(elections);
                     Candidate candidate = GetCandidateDetails(selectedElection);
-                    await Candidates.CreateCandidate(candidate);
+                    bool created = await Candidates.CreateCandidate(candidate);
+
+                    if (created) Console.WriteLine($"The Candidate \"{candidate.FirstName} {candidate.LastName}\" was successfully created!");
+                    else Console.WriteLine($"Failed to create Candidate \"{candidate.FirstName} {candidate.LastName} \".");
                 } else {
                     Console.WriteLine("There are no upcoming elections to add a new candidate to.");
                 }

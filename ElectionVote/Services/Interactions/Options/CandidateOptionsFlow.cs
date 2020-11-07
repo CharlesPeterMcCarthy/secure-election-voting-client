@@ -15,7 +15,7 @@ namespace ElectionVote.Services.Interactions.Options {
                 Console.WriteLine("Options:");
                 Console.WriteLine("1) Add Candidate To Election");
                 Console.WriteLine("2) Update Candidate");
-                Console.WriteLine("2) Delete Candidate");
+                Console.WriteLine("3) Delete Candidate");
 
                 try {
                     optionVal = int.Parse(Console.ReadLine());
@@ -34,6 +34,7 @@ namespace ElectionVote.Services.Interactions.Options {
                 case 2: // Update Candidate
                     break;
                 case 3: // Delete Candidate
+                    await DeleteCandidateFlow.Interact();
                     break;
                 default:
                     InvalidValueWarning();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace ElectionVote.Services.Models.Core {
@@ -9,6 +10,9 @@ namespace ElectionVote.Services.Models.Core {
 
         [JsonProperty("electionName")]
         public String ElectionName { get; set; }
+
+        [JsonProperty("candidates")]
+        public List<Candidate> Candidates { get; set; }
 
     }
 }
