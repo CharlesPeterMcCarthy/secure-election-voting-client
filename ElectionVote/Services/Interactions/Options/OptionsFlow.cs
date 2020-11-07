@@ -8,11 +8,7 @@ namespace ElectionVote.Services.Interactions.Options {
             int optionSectionVal = 0;
 
             do {
-                Console.WriteLine("What type of options would like?");
-                Console.WriteLine("Options:");
-                Console.WriteLine("1) Elections");
-                Console.WriteLine("2) Registrations");
-                Console.WriteLine("3) My Account");
+                PrintOptions();
 
                 try { 
                     optionSectionVal = int.Parse(Console.ReadLine());
@@ -20,21 +16,34 @@ namespace ElectionVote.Services.Interactions.Options {
                     InvalidValueWarning();
                     continue;
                 }
-            } while (optionSectionVal < 1 || optionSectionVal > 3);
+            } while (optionSectionVal < 1 || optionSectionVal > 4);
 
             Console.Clear();
 
             switch (optionSectionVal) {
                 case 1: // Elecctions
+                    await ElectionOptionsFlow.Interact();
                     break;
                 case 2: // Registrations
-                    await RegistrationOptionsFlow.InteractAsync();
+                    await RegistrationOptionsFlow.Interact();
                     break;
                 case 3: // My Account
+                    break;
+                case 4: // Candidates (admins)
                     break;
                 default:
                     break;
             }
+        }
+
+        private static void PrintOptions() {
+            Console.WriteLine("What type of options would like?");
+            Console.WriteLine("Options:");
+            Console.WriteLine("1) Elections");
+            Console.WriteLine("2) Registrations");
+            Console.WriteLine("3) My Account");
+
+            if (CurrentUser.IsAdmin) Console.WriteLine("4) Candidates");
         }
 
         private static void InvalidValueWarning() {

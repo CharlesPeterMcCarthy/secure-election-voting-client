@@ -58,6 +58,9 @@
     <Compile Include="Services\Models\Core\BallotPaper.cs" />
     <Compile Include="Services\Models\Core\Candidate.cs" />
     <Compile Include="Services\CurrentUser.cs" />
+    <Compile Include="Services\Interactions\Options\ElectionOptionsFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\ViewElectionsFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\ViewRegisteredElectionsFlow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

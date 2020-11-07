@@ -3,18 +3,19 @@ using System.Threading.Tasks;
 using ElectionVote.Services.Interactions.Tasks;
 
 namespace ElectionVote.Services.Interactions.Options {
-    public static class RegistrationOptionsFlow {
+    public static class ElectionOptionsFlow {
 
         public static async Task Interact() {
             int optionVal = 0;
 
-            Console.WriteLine("------ Registrations ------");
+            Console.WriteLine("------ Elections ------");
 
             do {
-                Console.WriteLine("What registrations option would you like?");
+                Console.WriteLine("What election option would you like?");
                 Console.WriteLine("Options:");
-                Console.WriteLine("1) View my Registrations");
-                Console.WriteLine("2) Register for an Election");
+                Console.WriteLine("1) View All Elections");
+                Console.WriteLine("2) View Upcoming Elections I've Registered For");
+                //Console.WriteLine("3) View Election Candidates");
 
                 try {
                     optionVal = int.Parse(Console.ReadLine());
@@ -27,10 +28,11 @@ namespace ElectionVote.Services.Interactions.Options {
             Console.Clear();
 
             switch (optionVal) {
-                case 1: // View Registrations
+                case 1: // View Elections
+                    await ViewElectionsFlow.Interact();
                     break;
-                case 2: // Register for election
-                    await RegisterForElectionFlow.Interact();
+                case 2: // View Registered Elections
+                    await ViewRegisteredElectionsFlow.Interact();
                     break;
                 default:
                     InvalidValueWarning();
@@ -41,6 +43,5 @@ namespace ElectionVote.Services.Interactions.Options {
         private static void InvalidValueWarning() {
             Console.WriteLine("You entered an invalid value!\n");
         }
-
     }
 }

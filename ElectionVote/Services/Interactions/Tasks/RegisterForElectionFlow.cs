@@ -32,7 +32,6 @@ namespace ElectionVote.Services.Interactions.Tasks {
                 Console.WriteLine(e);
                 Console.WriteLine("Unable to get elections");
             }
-            Console.Read();
         }
 
         private static async Task RegisterForElection(List<Election> elections) {
