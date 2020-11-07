@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ElectionVote.Services.Actions;
 using ElectionVote.Services.Constants;
 using ElectionVote.Services.DTO.Response;
 using ElectionVote.Services.Models.Core;
@@ -21,7 +22,9 @@ namespace ElectionVote.Services.Interactions.Tasks {
 
                 if (!repsonseObj.Success) throw new Exception("Failed to retrieve elections");
 
-                if (repsonseObj.Elections.Count > 0) {
+                List<Election> elections = repsonseObj.Elections;
+
+                if (elections.Count > 0) {
                     PrintElections(repsonseObj.Elections);
                     Console.Write("\nEnter election number: ");
 
@@ -32,6 +35,12 @@ namespace ElectionVote.Services.Interactions.Tasks {
                         InvalidValueWarning();
                         //continue;
                     }
+
+                    Election selectedEelection = elections[electionVal - 1];
+
+                    Console.WriteLine($"Registering for {selectedEelection.ElectionName}");
+
+                    await Elections.RegisterForElection("testid", selectedEelection.ElectionId);
                 } else {
                     Console.WriteLine("There are no elections to register for.");
                 }

@@ -8,7 +8,7 @@ using ElectionVote.Services.Enums;
 using ElectionVote.Services.Models;
 using Newtonsoft.Json;
 
-namespace ElectionVote.Services {
+namespace ElectionVote.Services.Actions {
 
     public static class Auth {
 
