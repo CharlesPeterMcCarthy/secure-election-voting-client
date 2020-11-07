@@ -47,6 +47,7 @@
     <Compile Include="Services\DTO\Request\IRequest.cs" />
     <Compile Include="Services\DTO\Response\GetUserResponseDto.cs" />
     <Compile Include="Services\Interactions\AuthFlow.cs" />
+    <Compile Include="Services\Interactions\OptionsFlow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

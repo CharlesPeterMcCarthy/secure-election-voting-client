@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using ElectionVote.Services;
-using ElectionVote.Services.Enums;
 using ElectionVote.Services.Interactions;
 using ElectionVote.Services.Models;
 
@@ -12,15 +9,12 @@ namespace ElectionVote {
 
             User user = await AuthFlow.Interact();
 
-            if (user != null) {
-                Console.WriteLine(user);
-                Console.WriteLine(user.FirstName);
-                Console.WriteLine(user.LastName);
-                Console.WriteLine(user.Email);
-                Console.WriteLine(user.UserType);
-                Console.WriteLine(user.Times);
-            }
+            Console.Clear();
+            Console.WriteLine($"Hi {user.FirstName}!");
 
+            Console.WriteLine("What would you like to do next?");
+            Console.WriteLine("Options:");
+            Console.WriteLine("1) View all Elections");
         }
     }
 }
