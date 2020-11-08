@@ -49,7 +49,7 @@ namespace ElectionVote.Services.Interactions.Options {
             Console.WriteLine("What type of options would like?");
             Console.WriteLine("Options:");
             Console.WriteLine("1) Elections");
-            Console.WriteLine("2) Registrations");
+            Console.WriteLine("2) Election Registrations");
             Console.WriteLine("3) Vote");
             Console.WriteLine("4) My Account");
 

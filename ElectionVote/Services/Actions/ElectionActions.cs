@@ -10,25 +10,6 @@ using Newtonsoft.Json;
 namespace ElectionVote.Services.Actions {
     public static class ElectionActions {
 
-        public static async Task<bool> RegisterForElection(String userId, String electionId) {
-            RegisterForElectionRequestDto dto = new RegisterForElectionRequestDto() {
-                UserId = userId,
-                ElectionId = electionId
-            };
-
-            try {
-                String response = await HttpRequest.Post(API.BASE_URL + "/election/register", dto);
-
-                RegisterForElectionResponseDto repsonseObj = JsonConvert.DeserializeObject<RegisterForElectionResponseDto>(response);
-
-                if (!repsonseObj.Success) throw new Exception("Failed to register for election");
-
-                return true;
-            } catch (Exception e) {
-                Console.WriteLine("Unable to register for election");
-                return false;
-            }
-        }
 
         public static async Task<List<Election>> GetAllElections() {
             try {
@@ -88,7 +69,7 @@ namespace ElectionVote.Services.Actions {
 
         public static async Task<List<Election>> GetUserUnregisteredElections() {
             try {
-                String response = await HttpRequest.Get($"{API.BASE_URL}/election/all-registered/{CurrentUser.UserID}");
+                String response = await HttpRequest.Get($"{API.BASE_URL}/election/unregistered/{CurrentUser.UserID}/false"); // All elections
                 GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
 
                 if (!repsonseObj.Success) throw new Exception("Failed to retrieve unregistered elections");
@@ -96,6 +77,20 @@ namespace ElectionVote.Services.Actions {
                 return repsonseObj.Elections;
             } catch (Exception e) {
                 Console.WriteLine("Unable to retrieve unregistered elections");
+                return null;
+            }
+        }
+
+        public static async Task<List<Election>> GetUserRegisteredElections() {
+            try {
+                String response = await HttpRequest.Get($"{API.BASE_URL}/election/registered/{CurrentUser.UserID}/true"); // Upcoming elections only
+                GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
+
+                if (!repsonseObj.Success) throw new Exception("Failed to retrieve registered elections");
+
+                return repsonseObj.Elections;
+            } catch (Exception e) {
+                Console.WriteLine("Unable to retrieve registered elections");
                 return null;
             }
         }

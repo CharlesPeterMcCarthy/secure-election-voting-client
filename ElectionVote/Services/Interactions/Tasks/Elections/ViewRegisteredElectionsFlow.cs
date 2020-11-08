@@ -12,7 +12,7 @@ namespace ElectionVote.Services.Interactions.Tasks.Elections {
             Console.WriteLine("------ Your Upcoming Registered Elections ------");
 
             try {
-                List<Election> elections = await ElectionActions.GetUserUnregisteredElections();
+                List<Election> elections = await ElectionActions.GetUserRegisteredElections();
 
                 if (elections.Count > 0) {
                     CommonFlow.PrintElections(elections);

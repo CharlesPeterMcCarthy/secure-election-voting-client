@@ -48,7 +48,6 @@
     <Compile Include="Services\Interactions\AuthFlow.cs" />
     <Compile Include="Services\Interactions\Options\OptionsFlow.cs" />
     <Compile Include="Services\Interactions\Options\RegistrationOptionsFlow.cs" />
-    <Compile Include="Services\Interactions\Tasks\RegisterForElectionFlow.cs" />
     <Compile Include="Services\DTO\Response\GetElectionsResponseDto.cs" />
     <Compile Include="Services\Models\Core\Election.cs" />
     <Compile Include="Services\Actions\Auth.cs" />
@@ -81,6 +80,11 @@
     <Compile Include="Services\Interactions\Tasks\Candidates\UpdateCandidateFlow.cs" />
     <Compile Include="Services\Interactions\Tasks\Candidates\DeleteCandidateFlow.cs" />
     <Compile Include="Services\Interactions\Tasks\Candidates\ViewCandidatesFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\Registrations\RegisterForElectionFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\Registrations\RemoveRegistrationFlow.cs" />
+    <Compile Include="Services\Actions\RegistrationActions.cs" />
+    <Compile Include="Services\DTO\Request\RemoveRegistrationRequestDto.cs" />
+    <Compile Include="Services\DTO\Response\RemoveRegistrationResponseDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -98,6 +102,7 @@
     <Folder Include="Services\Actions\" />
     <Folder Include="Services\Interactions\Tasks\Elections\" />
     <Folder Include="Services\Interactions\Tasks\Candidates\" />
+    <Folder Include="Services\Interactions\Tasks\Registrations\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

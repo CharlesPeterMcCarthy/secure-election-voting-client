@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using ElectionVote.Services.Actions;
 using ElectionVote.Services.Models.Core;
 
-namespace ElectionVote.Services.Interactions.Tasks {
+namespace ElectionVote.Services.Interactions.Tasks.Registrations {
     public static class RegisterForElectionFlow {
 
         public static async Task Interact() {
@@ -52,7 +52,7 @@ namespace ElectionVote.Services.Interactions.Tasks {
 
                 Console.WriteLine($"Registering for {selectedEelection.ElectionName}");
 
-                bool registered = await ElectionActions.RegisterForElection(CurrentUser.UserID, selectedEelection.ElectionId);
+                bool registered = await RegistrationActions.RegisterForElection(CurrentUser.UserID, selectedEelection.ElectionId);
 
                 if (registered) {
                     Console.WriteLine($"You have successfully registered for \"{selectedEelection.ElectionName}\"!");
