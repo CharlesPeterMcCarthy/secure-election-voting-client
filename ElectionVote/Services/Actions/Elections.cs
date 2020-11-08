@@ -110,10 +110,31 @@ namespace ElectionVote.Services.Actions {
             }
         }
 
+        public static async Task<Election> CreateElection(Election election) {
+            CreateElectionRequestDto dto = new CreateElectionRequestDto() {
+                UserId = CurrentUser.UserID,
+                ElectionName = election.ElectionName
+            };
+
+            try {
+                String response = await HttpRequest.Post($"{API.BASE_URL}/election", dto);
+                ElectionResponseDto repsonseObj = JsonConvert.DeserializeObject<ElectionResponseDto>(response);
+
+                if (!repsonseObj.Success) throw new Exception("Failed to create election");
+
+                Election created = repsonseObj.Election;
+
+                return created;
+            } catch (Exception e) {
+                Console.WriteLine("Unable to create election");
+                return null;
+            }
+        }
+
         public static async Task<bool> StartElection(String electionId) {
             try {
                 String response = await HttpRequest.Put($"{API.BASE_URL}/election/start/{electionId}", null);
-                UpdateElectionResponseDto repsonseObj = JsonConvert.DeserializeObject<UpdateElectionResponseDto>(response);
+                ElectionResponseDto repsonseObj = JsonConvert.DeserializeObject<ElectionResponseDto>(response);
 
                 if (!repsonseObj.Success) throw new Exception("Failed to start election");
 
@@ -129,7 +150,7 @@ namespace ElectionVote.Services.Actions {
         public static async Task<bool> EndElection(String electionId) {
             try {
                 String response = await HttpRequest.Put($"{API.BASE_URL}/election/finish/{electionId}", null);
-                UpdateElectionResponseDto repsonseObj = JsonConvert.DeserializeObject<UpdateElectionResponseDto>(response);
+                ElectionResponseDto repsonseObj = JsonConvert.DeserializeObject<ElectionResponseDto>(response);
 
                 if (!repsonseObj.Success) throw new Exception("Failed to end election");
 

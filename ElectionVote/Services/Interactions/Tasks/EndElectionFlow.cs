@@ -21,7 +21,7 @@ namespace ElectionVote.Services.Interactions.Tasks {
 
                     bool started = await Elections.EndElection(selectedElection.ElectionId);
 
-                    if (started) Console.WriteLine($"{selectedElection.ElectionName} has successfully ended. Voters can no longer vote on this election..");
+                    if (started) Console.WriteLine($"{selectedElection.ElectionName} has successfully ended. Voters can no longer vote on this election.");
                     else Console.WriteLine($"Failed to end {selectedElection.ElectionName}.");
                 } else {
                     Console.WriteLine("There are no ongoing elections to end.");

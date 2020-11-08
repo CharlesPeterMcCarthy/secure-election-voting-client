@@ -41,6 +41,7 @@ namespace ElectionVote.Services.Interactions.Options {
                     await ViewRegisteredElectionsFlow.Interact();
                     break;
                 case 5: // Create Election
+                    await CreateElectionFlow.Interact();
                     break;
                 case 6: // Start Election
                     await StartElectionFlow.Interact();

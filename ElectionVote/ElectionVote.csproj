@@ -75,6 +75,8 @@
     <Compile Include="Services\Interactions\Tasks\StartElectionFlow.cs" />
     <Compile Include="Services\DTO\Response\UpdateElectionResponseDto.cs" />
     <Compile Include="Services\Interactions\Tasks\EndElectionFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\CreateElectionFlow.cs" />
+    <Compile Include="Services\DTO\Request\CreateElectionRequestDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
