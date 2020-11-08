@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using ElectionVote.Services.Actions;
 using ElectionVote.Services.Models.Core;
 
-namespace ElectionVote.Services.Interactions.Tasks {
+namespace ElectionVote.Services.Interactions.Tasks.Elections {
     public static class CreateElectionFlow {
 
         public static async Task Interact() {
@@ -14,7 +14,7 @@ namespace ElectionVote.Services.Interactions.Tasks {
             try {
                 Election election = GetElectionDetails();
 
-                Election createdElection = await Elections.CreateElection(election);
+                Election createdElection = await ElectionActions.CreateElection(election);
 
                 if (createdElection != null) Console.WriteLine($"{createdElection.ElectionName} was successfully created!");
                 else Console.WriteLine($"Unable to created {createdElection.ElectionName}");

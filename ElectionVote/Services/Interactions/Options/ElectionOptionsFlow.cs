@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ElectionVote.Services.Interactions.Tasks;
+using ElectionVote.Services.Interactions.Tasks.Elections;
 
 namespace ElectionVote.Services.Interactions.Options {
     public static class ElectionOptionsFlow {
@@ -48,6 +48,9 @@ namespace ElectionVote.Services.Interactions.Options {
                     break;
                 case 7: // End Election
                     await EndElectionFlow.Interact();
+                    break;
+                case 9: // Delete Election
+                    await DeleteElectionFlow.Interact();
                     break;
                 default:
                     CommonFlow.InvalidValueWarning();

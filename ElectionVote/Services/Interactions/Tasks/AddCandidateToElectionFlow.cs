@@ -13,7 +13,7 @@ namespace ElectionVote.Services.Interactions.Tasks {
             Console.WriteLine("Which election do you want to add the new candidate to?");
 
             try {
-                List<Election> elections = await Elections.GetUpcomingElections();
+                List<Election> elections = await ElectionActions.GetUpcomingElections();
 
                 if (elections.Count > 0) {
                     CommonFlow.PrintElections(elections);

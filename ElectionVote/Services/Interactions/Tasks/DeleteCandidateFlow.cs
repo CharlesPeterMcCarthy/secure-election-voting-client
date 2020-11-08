@@ -13,7 +13,7 @@ namespace ElectionVote.Services.Interactions.Tasks {
             Console.WriteLine("From which election do you want to delete a candidate?");
 
             try {
-                List<Election> elections = await Elections.GetUpcomingElections();
+                List<Election> elections = await ElectionActions.GetUpcomingElections();
 
                 if (elections.Count > 0) {
                     CommonFlow.PrintElections(elections);

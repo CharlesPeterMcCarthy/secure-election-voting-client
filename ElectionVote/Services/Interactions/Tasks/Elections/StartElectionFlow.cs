@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using ElectionVote.Services.Actions;
 using ElectionVote.Services.Models.Core;
 
-namespace ElectionVote.Services.Interactions.Tasks {
+namespace ElectionVote.Services.Interactions.Tasks.Elections {
     public static class StartElectionFlow {
 
         public static async Task Interact() {
@@ -13,13 +13,13 @@ namespace ElectionVote.Services.Interactions.Tasks {
             Console.WriteLine("Which election do you want to start?");
 
             try {
-                List<Election> elections = await Elections.GetUpcomingElections();
+                List<Election> elections = await ElectionActions.GetUpcomingElections();
 
                 if (elections.Count > 0) {
                     CommonFlow.PrintElections(elections);
                     Election selectedElection = CommonFlow.GetSelectedElection(elections);
 
-                    bool started = await Elections.StartElection(selectedElection.ElectionId);
+                    bool started = await ElectionActions.StartElection(selectedElection.ElectionId);
 
                     if (started) Console.WriteLine($"{selectedElection.ElectionName} has successfully started. Voters can now begin voting.");
                     else Console.WriteLine($"Failed to start {selectedElection.ElectionName}.");

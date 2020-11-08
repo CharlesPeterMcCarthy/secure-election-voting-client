@@ -8,7 +8,7 @@ using ElectionVote.Services.Models.Core;
 using Newtonsoft.Json;
 
 namespace ElectionVote.Services.Actions {
-    public static class Elections {
+    public static class ElectionActions {
 
         public static async Task<bool> RegisterForElection(String userId, String electionId) {
             RegisterForElectionRequestDto dto = new RegisterForElectionRequestDto() {
@@ -138,8 +138,6 @@ namespace ElectionVote.Services.Actions {
 
                 if (!repsonseObj.Success) throw new Exception("Failed to start election");
 
-                Election election = repsonseObj.Election;
-
                 return true;
             } catch (Exception e) {
                 Console.WriteLine("Unable to start election");
@@ -154,11 +152,23 @@ namespace ElectionVote.Services.Actions {
 
                 if (!repsonseObj.Success) throw new Exception("Failed to end election");
 
-                Election election = repsonseObj.Election;
-
                 return true;
             } catch (Exception e) {
                 Console.WriteLine("Unable to end election");
+                return false;
+            }
+        }
+
+        public static async Task<bool> DeleteElection(String electionId) {
+            try {
+                String response = await HttpRequest.Delete($"{API.BASE_URL}/election/{electionId}");
+                ElectionResponseDto repsonseObj = JsonConvert.DeserializeObject<ElectionResponseDto>(response);
+
+                if (!repsonseObj.Success) throw new Exception("Failed to delete election");
+
+                return true;
+            } catch (Exception e) {
+                Console.WriteLine("Unable to delete election");
                 return false;
             }
         }

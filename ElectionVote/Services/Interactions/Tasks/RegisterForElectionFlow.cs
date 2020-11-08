@@ -13,7 +13,7 @@ namespace ElectionVote.Services.Interactions.Tasks {
             Console.WriteLine("Which election would you like to register for?");
 
             try {
-                List<Election> elections = await Elections.GetUserUnregisteredElections();
+                List<Election> elections = await ElectionActions.GetUserUnregisteredElections();
 
                 if (elections.Count > 0) {
                     await RegisterForElection(elections);
@@ -52,7 +52,7 @@ namespace ElectionVote.Services.Interactions.Tasks {
 
                 Console.WriteLine($"Registering for {selectedEelection.ElectionName}");
 
-                bool registered = await Elections.RegisterForElection(CurrentUser.UserID, selectedEelection.ElectionId);
+                bool registered = await ElectionActions.RegisterForElection(CurrentUser.UserID, selectedEelection.ElectionId);
 
                 if (registered) {
                     Console.WriteLine($"You have successfully registered for \"{selectedEelection.ElectionName}\"!");

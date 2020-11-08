@@ -59,8 +59,6 @@
     <Compile Include="Services\Models\Core\Candidate.cs" />
     <Compile Include="Services\CurrentUser.cs" />
     <Compile Include="Services\Interactions\Options\ElectionOptionsFlow.cs" />
-    <Compile Include="Services\Interactions\Tasks\ViewElectionsFlow.cs" />
-    <Compile Include="Services\Interactions\Tasks\ViewRegisteredElectionsFlow.cs" />
     <Compile Include="Services\Interactions\Options\CandidateOptionsFlow.cs" />
     <Compile Include="Services\Interactions\Tasks\AddCandidateToElectionFlow.cs" />
     <Compile Include="Services\Actions\Candidates.cs" />
@@ -72,11 +70,14 @@
     <Compile Include="Services\Models\IUpdatable.cs" />
     <Compile Include="Services\DTO\Response\UpdateCandidateResponseDto.cs" />
     <Compile Include="Services\Interactions\CommonFlow.cs" />
-    <Compile Include="Services\Interactions\Tasks\StartElectionFlow.cs" />
     <Compile Include="Services\DTO\Response\UpdateElectionResponseDto.cs" />
-    <Compile Include="Services\Interactions\Tasks\EndElectionFlow.cs" />
-    <Compile Include="Services\Interactions\Tasks\CreateElectionFlow.cs" />
     <Compile Include="Services\DTO\Request\CreateElectionRequestDto.cs" />
+    <Compile Include="Services\Interactions\Tasks\Elections\CreateElectionFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\Elections\EndElectionFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\Elections\StartElectionFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\Elections\ViewElectionsFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\Elections\ViewRegisteredElectionsFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\Elections\DeleteElectionFlow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -92,6 +93,7 @@
     <Folder Include="Services\Interactions\Options\" />
     <Folder Include="Services\Interactions\Tasks\" />
     <Folder Include="Services\Actions\" />
+    <Folder Include="Services\Interactions\Tasks\Elections\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
