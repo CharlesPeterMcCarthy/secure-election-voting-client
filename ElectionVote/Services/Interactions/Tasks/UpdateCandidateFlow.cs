@@ -41,7 +41,8 @@ namespace ElectionVote.Services.Interactions.Tasks {
                 Console.WriteLine(e);
                 Console.WriteLine("Unable to update candidate");
             }
-            Console.Read();
+
+            CommonFlow.EndFlowPrompt();
         }
 
         private static Candidate GetUpdatedCandidateDetails(Candidate candidate) {

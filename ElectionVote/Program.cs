@@ -14,11 +14,11 @@ namespace ElectionVote {
             //User user = await AuthFlow.Interact();
             //User user = await Auth.Login("test@test.com");
             User user = new User() {
-                FirstName = "Charles",
-                LastName = "McC",
-                Email = "test@test.com",
+                FirstName = "CHarles",
+                LastName = "McCarthy III",
+                Email = "chaz@test.com",
                 UserType = UserType.VOTER,
-                UserId = "9ad56532-3fb1-4948-87b0-2d9c3539cb37"
+                UserId = "fb926a58-d1ca-4746-aae3-abe8d8dad6ed"
             };
             CurrentUser.SetCurrentUser(user);
 

@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElectionVote.Services.Actions;
-using ElectionVote.Services.Constants;
-using ElectionVote.Services.DTO.Response;
 using ElectionVote.Services.Models.Core;
-using Newtonsoft.Json;
 
 namespace ElectionVote.Services.Interactions.Tasks {
     public static class AddCandidateToElectionFlow {
@@ -33,7 +30,8 @@ namespace ElectionVote.Services.Interactions.Tasks {
                 Console.WriteLine(e);
                 Console.WriteLine("Unable to get elections");
             }
-            Console.Read();
+
+            CommonFlow.EndFlowPrompt();
         }
 
         private static Candidate GetCandidateDetails(Election election) {

@@ -94,5 +94,21 @@ namespace ElectionVote.Services.Actions {
             }
         }
 
+        public static async Task<bool> StartElection(String electionId) {
+            try {
+                String response = await HttpRequest.Put($"{API.BASE_URL}/election/start/{electionId}", null);
+                UpdateElectionResponseDto repsonseObj = JsonConvert.DeserializeObject<UpdateElectionResponseDto>(response);
+
+                if (!repsonseObj.Success) throw new Exception("Failed to start election");
+
+                Election election = repsonseObj.Election;
+
+                return true;
+            } catch (Exception e) {
+                Console.WriteLine("Unable to start election");
+                return false;
+            }
+        }
+
     }
 }

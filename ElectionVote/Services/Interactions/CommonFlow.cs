@@ -16,7 +16,9 @@ namespace ElectionVote.Services.Interactions {
 
             elections.ForEach(e => {
                 i++;
-                Console.WriteLine($"{i}: {e.ElectionName}");
+                Console.Write($"{i}: {e.ElectionName}");
+                if (e.ElectionFinished) Console.Write(" (Finished)");
+                Console.WriteLine();
             });
         }
 

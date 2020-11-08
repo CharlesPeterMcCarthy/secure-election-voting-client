@@ -14,37 +14,44 @@ namespace ElectionVote.Services.Interactions.Options {
                 Console.WriteLine("What election option would you like?");
                 Console.WriteLine("Options:");
                 Console.WriteLine("1) View All Elections");
-                Console.WriteLine("2) View Upcoming Elections I've Registered For");
-                Console.WriteLine("3) Start Election");
-                Console.WriteLine("4) Stop Election");
-                Console.WriteLine("5) Update Election");
-                Console.WriteLine("6) Delete Election");
+                //Console.WriteLine("2) View Upcoming Elections");
+                //Console.WriteLine("3) View Finsihed Elections");
+                Console.WriteLine("4) View Upcoming Elections I've Registered For");
+                Console.WriteLine("5) Create Election");
+                Console.WriteLine("6) Start Election");
+                Console.WriteLine("7) Stop Election");
+                Console.WriteLine("8) Update Election");
+                Console.WriteLine("9) Delete Election");
 
                 try {
                     optionVal = int.Parse(Console.ReadLine());
                 } catch (FormatException) {
-                    InvalidValueWarning();
+                    CommonFlow.InvalidValueWarning();
                     continue;
                 }
-            } while (optionVal < 1 || optionVal > 2);
+            } while (optionVal < 1 || optionVal > 9);
 
             Console.Clear();
 
             switch (optionVal) {
-                case 1: // View Elections
+                case 1: // View All Elections
                     await ViewElectionsFlow.Interact();
                     break;
-                case 2: // View Registered Elections
+                case 4: // View Registered Elections
                     await ViewRegisteredElectionsFlow.Interact();
                     break;
+                case 5: // Create Election
+                    break;
+                case 6: // Start Election
+                    await StartElectionFlow.Interact();
+                    break;
+                case 7: // Finish Election
+                    break;
                 default:
-                    InvalidValueWarning();
+                    CommonFlow.InvalidValueWarning();
                     break;
             }
         }
 
-        private static void InvalidValueWarning() {
-            Console.WriteLine("You entered an invalid value!\n");
-        }
     }
 }

@@ -20,7 +20,7 @@ namespace ElectionVote.Services.Interactions.Options {
                 try {
                     optionVal = int.Parse(Console.ReadLine());
                 } catch (FormatException) {
-                    InvalidValueWarning();
+                    CommonFlow.InvalidValueWarning();
                     continue;
                 }
             } while (optionVal < 1 || optionVal > 3);
@@ -38,13 +38,9 @@ namespace ElectionVote.Services.Interactions.Options {
                     await DeleteCandidateFlow.Interact();
                     break;
                 default:
-                    InvalidValueWarning();
+                    CommonFlow.InvalidValueWarning();
                     break;
             }
-        }
-
-        private static void InvalidValueWarning() {
-            Console.WriteLine("You entered an invalid value!\n");
         }
 
     }

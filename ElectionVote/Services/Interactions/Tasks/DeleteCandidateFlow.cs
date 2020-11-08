@@ -40,7 +40,8 @@ namespace ElectionVote.Services.Interactions.Tasks {
                 Console.WriteLine(e);
                 Console.WriteLine("Unable to delete candidate");
             }
-            Console.Read();
+
+            CommonFlow.EndFlowPrompt();
         }
 
     }

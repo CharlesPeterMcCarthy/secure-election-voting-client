@@ -19,7 +19,7 @@ namespace ElectionVote.Services.Interactions.Options {
                 try {
                     optionSectionVal = int.Parse(Console.ReadLine());
                 } catch (FormatException) {
-                    InvalidValueWarning();
+                    CommonFlow.InvalidValueWarning();
                     continue;
                 }
             } while (optionSectionVal < 1 || optionSectionVal > 5);
@@ -54,10 +54,6 @@ namespace ElectionVote.Services.Interactions.Options {
             Console.WriteLine("4) My Account");
 
             if (CurrentUser.IsAdmin) Console.WriteLine("5) Candidates");
-        }
-
-        private static void InvalidValueWarning() {
-            Console.WriteLine("You entered an invalid value!\n");
         }
 
     }

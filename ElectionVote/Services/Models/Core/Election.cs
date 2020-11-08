@@ -11,6 +11,9 @@ namespace ElectionVote.Services.Models.Core {
         [JsonProperty("electionName")]
         public String ElectionName { get; set; }
 
+        [JsonProperty("electionFinished")]
+        public Boolean ElectionFinished { get; set; }
+
         [JsonProperty("candidates")]
         public List<Candidate> Candidates { get; set; }
 
