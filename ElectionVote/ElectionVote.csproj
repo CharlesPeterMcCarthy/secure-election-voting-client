@@ -52,7 +52,7 @@
     <Compile Include="Services\DTO\Response\GetElectionsResponseDto.cs" />
     <Compile Include="Services\Models\Core\Election.cs" />
     <Compile Include="Services\Actions\Auth.cs" />
-    <Compile Include="Services\Actions\Elections.cs" />
+    <Compile Include="Services\Actions\ElectionActions.cs" />
     <Compile Include="Services\DTO\Request\RegisterForElectionRequestDto.cs" />
     <Compile Include="Services\DTO\Response\RegisterForElectionResponseDto.cs" />
     <Compile Include="Services\Models\Core\BallotPaper.cs" />
@@ -60,12 +60,9 @@
     <Compile Include="Services\CurrentUser.cs" />
     <Compile Include="Services\Interactions\Options\ElectionOptionsFlow.cs" />
     <Compile Include="Services\Interactions\Options\CandidateOptionsFlow.cs" />
-    <Compile Include="Services\Interactions\Tasks\AddCandidateToElectionFlow.cs" />
-    <Compile Include="Services\Actions\Candidates.cs" />
+    <Compile Include="Services\Actions\CandidateActions.cs" />
     <Compile Include="Services\DTO\Request\CreateCandidateRequestDto.cs" />
     <Compile Include="Services\DTO\Response\CreateCandidateResponseDto.cs" />
-    <Compile Include="Services\Interactions\Tasks\DeleteCandidateFlow.cs" />
-    <Compile Include="Services\Interactions\Tasks\UpdateCandidateFlow.cs" />
     <Compile Include="Services\DTO\Request\UpdateCandidateRequestDto.cs" />
     <Compile Include="Services\Models\IUpdatable.cs" />
     <Compile Include="Services\DTO\Response\UpdateCandidateResponseDto.cs" />
@@ -80,6 +77,10 @@
     <Compile Include="Services\Interactions\Tasks\Elections\DeleteElectionFlow.cs" />
     <Compile Include="Services\Interactions\Tasks\Elections\UpdateElectionFlow.cs" />
     <Compile Include="Services\DTO\Request\UpdateElectionRequestDto.cs" />
+    <Compile Include="Services\Interactions\Tasks\Candidates\AddCandidateToElectionFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\Candidates\UpdateCandidateFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\Candidates\DeleteCandidateFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\Candidates\ViewCandidatesFlow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -96,6 +97,7 @@
     <Folder Include="Services\Interactions\Tasks\" />
     <Folder Include="Services\Actions\" />
     <Folder Include="Services\Interactions\Tasks\Elections\" />
+    <Folder Include="Services\Interactions\Tasks\Candidates\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

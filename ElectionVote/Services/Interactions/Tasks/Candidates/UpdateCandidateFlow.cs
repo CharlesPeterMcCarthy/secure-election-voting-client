@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using ElectionVote.Services.Actions;
 using ElectionVote.Services.Models.Core;
 
-namespace ElectionVote.Services.Interactions.Tasks {
+namespace ElectionVote.Services.Interactions.Tasks.Candidates {
     public static class UpdateCandidateFlow {
 
         public static async Task Interact() {
@@ -27,7 +27,7 @@ namespace ElectionVote.Services.Interactions.Tasks {
 
                         Candidate candidate = CommonFlow.GetSelectedCandidate(selectedElection.Candidates);
                         Candidate changedCandidate = GetUpdatedCandidateDetails(candidate);
-                        Candidate updatedCandidate = await Candidates.UpdateCandidate(candidate);
+                        Candidate updatedCandidate = await CandidateActions.UpdateCandidate(candidate);
 
                         if (updatedCandidate != null) Console.WriteLine($"The Candidate \"{updatedCandidate.FirstName} {updatedCandidate.LastName}\" has been successfully updated!");
                         else Console.WriteLine($"Failed to update the Candidate \"{candidate.FirstName} {candidate.LastName}\".");

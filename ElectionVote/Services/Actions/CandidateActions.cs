@@ -8,7 +8,7 @@ using ElectionVote.Services.Models.Core;
 using Newtonsoft.Json;
 
 namespace ElectionVote.Services.Actions {
-    public static class Candidates {
+    public static class CandidateActions {
 
         public static async Task<bool> CreateCandidate(Candidate candidate) {
             CreateCandidateRequestDto dto = new CreateCandidateRequestDto() {

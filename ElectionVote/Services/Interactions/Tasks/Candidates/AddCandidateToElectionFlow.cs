@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using ElectionVote.Services.Actions;
 using ElectionVote.Services.Models.Core;
 
-namespace ElectionVote.Services.Interactions.Tasks {
+namespace ElectionVote.Services.Interactions.Tasks.Candidates {
     public static class AddCandidateToElectionFlow {
 
         public static async Task Interact() {
@@ -19,7 +19,7 @@ namespace ElectionVote.Services.Interactions.Tasks {
                     CommonFlow.PrintElections(elections);
                     Election selectedElection = CommonFlow.GetSelectedElection(elections);
                     Candidate candidate = GetCandidateDetails(selectedElection);
-                    bool created = await Candidates.CreateCandidate(candidate);
+                    bool created = await CandidateActions.CreateCandidate(candidate);
 
                     if (created) Console.WriteLine($"The Candidate \"{candidate.FirstName} {candidate.LastName}\" was successfully created!");
                     else Console.WriteLine($"Failed to create Candidate \"{candidate.FirstName} {candidate.LastName} \".");

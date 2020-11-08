@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ElectionVote.Services.Interactions.Tasks;
+using ElectionVote.Services.Interactions.Tasks.Candidates;
 
 namespace ElectionVote.Services.Interactions.Options {
     public static class CandidateOptionsFlow {
@@ -13,9 +13,10 @@ namespace ElectionVote.Services.Interactions.Options {
             do {
                 Console.WriteLine("What candidate option would you like?");
                 Console.WriteLine("Options:");
-                Console.WriteLine("1) Add Candidate To Election");
-                Console.WriteLine("2) Update Candidate");
-                Console.WriteLine("3) Delete Candidate");
+                Console.WriteLine("1) View Election Candidates");
+                Console.WriteLine("2) Add Candidate To Election");
+                Console.WriteLine("3) Update Candidate");
+                Console.WriteLine("4) Delete Candidate");
 
                 try {
                     optionVal = int.Parse(Console.ReadLine());
@@ -23,18 +24,21 @@ namespace ElectionVote.Services.Interactions.Options {
                     CommonFlow.InvalidValueWarning();
                     continue;
                 }
-            } while (optionVal < 1 || optionVal > 3);
+            } while (optionVal < 1 || optionVal > 4);
 
             Console.Clear();
 
             switch (optionVal) {
-                case 1: // Add Candidate To Election
+                case 1: // View Election Candidates
+                    await ViewCandidatesFlow.Interact();
+                    break;
+                case 2: // Add Candidate To Election
                     await AddCandidateToElectionFlow.Interact();
                     break;
-                case 2: // Update Candidate
+                case 3: // Update Candidate
                     await UpdateCandidateFlow.Interact();
                     break;
-                case 3: // Delete Candidate
+                case 4: // Delete Candidate
                     await DeleteCandidateFlow.Interact();
                     break;
                 default:

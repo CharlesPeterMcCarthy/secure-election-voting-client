@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using ElectionVote.Services.Actions;
 using ElectionVote.Services.Models.Core;
 
-namespace ElectionVote.Services.Interactions.Tasks {
+namespace ElectionVote.Services.Interactions.Tasks.Candidates {
     public static class DeleteCandidateFlow {
 
         public static async Task Interact() {
@@ -26,7 +26,7 @@ namespace ElectionVote.Services.Interactions.Tasks {
                         CommonFlow.PrintCandidates(selectedElection.Candidates);
                         Candidate candidate = CommonFlow.GetSelectedCandidate(selectedElection.Candidates);
 
-                        bool deleted = await Candidates.DeleteCandidate(candidate);
+                        bool deleted = await CandidateActions.DeleteCandidate(candidate);
 
                         if (deleted) Console.WriteLine($"The Candidate \"{candidate.FirstName} {candidate.LastName}\" has been successfully deleted!");
                         else Console.WriteLine($"Failed to delete the Candidate \"{candidate.FirstName} {candidate.LastName}\".");
