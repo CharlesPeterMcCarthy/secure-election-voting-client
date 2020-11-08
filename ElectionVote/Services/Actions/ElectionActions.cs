@@ -10,7 +10,6 @@ using Newtonsoft.Json;
 namespace ElectionVote.Services.Actions {
     public static class ElectionActions {
 
-
         public static async Task<List<Election>> GetAllElections() {
             try {
                 String response = await HttpRequest.Get($"{API.BASE_URL}/election/all");
@@ -63,6 +62,20 @@ namespace ElectionVote.Services.Actions {
                 return repsonseObj.Elections;
             } catch (Exception e) {
                 Console.WriteLine("Unable to retrieve current elections");
+                return null;
+            }
+        }
+
+        public static async Task<List<Election>> GetCurrentNonVotedElections() {
+            try {
+                String response = await HttpRequest.Get($"{API.BASE_URL}/election/non-voted/{CurrentUser.UserID}");
+                GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
+
+                if (!repsonseObj.Success) throw new Exception("Failed to retrieve non-voted elections");
+
+                return repsonseObj.Elections;
+            } catch (Exception e) {
+                Console.WriteLine("Unable to retrieve non-voted elections");
                 return null;
             }
         }

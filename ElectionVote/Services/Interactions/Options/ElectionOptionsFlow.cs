@@ -11,17 +11,7 @@ namespace ElectionVote.Services.Interactions.Options {
             Console.WriteLine("------ Elections ------");
 
             do {
-                Console.WriteLine("What election option would you like?");
-                Console.WriteLine("Options:");
-                Console.WriteLine("1) View All Elections");
-                //Console.WriteLine("2) View Upcoming Elections");
-                //Console.WriteLine("3) View Finsihed Elections");
-                Console.WriteLine("4) View Upcoming Elections I've Registered For");
-                Console.WriteLine("5) Create Election");
-                Console.WriteLine("6) Start Election");
-                Console.WriteLine("7) End Election");
-                Console.WriteLine("8) Update Election");
-                Console.WriteLine("9) Delete Election");
+                PrintOptions();
 
                 try {
                     optionVal = int.Parse(Console.ReadLine());
@@ -29,7 +19,7 @@ namespace ElectionVote.Services.Interactions.Options {
                     CommonFlow.InvalidValueWarning();
                     continue;
                 }
-            } while (optionVal < 1 || optionVal > 9);
+            } while (optionVal < 1 || optionVal > 7);
 
             Console.Clear();
 
@@ -37,27 +27,42 @@ namespace ElectionVote.Services.Interactions.Options {
                 case 1: // View All Elections
                     await ViewElectionsFlow.Interact();
                     break;
-                case 4: // View Registered Elections
+                case 2: // View Registered Elections
                     await ViewRegisteredElectionsFlow.Interact();
                     break;
-                case 5: // Create Election
+                case 3: // Create Election
                     await CreateElectionFlow.Interact();
                     break;
-                case 6: // Start Election
+                case 4: // Start Election
                     await StartElectionFlow.Interact();
                     break;
-                case 7: // End Election
+                case 5: // End Election
                     await EndElectionFlow.Interact();
                     break;
-                case 8: // Update Election
+                case 6: // Update Election
                     await UpdateElectionFlow.Interact();
                     break;
-                case 9: // Delete Election
+                case 7: // Delete Election
                     await DeleteElectionFlow.Interact();
                     break;
                 default:
                     CommonFlow.InvalidValueWarning();
                     break;
+            }
+        }
+
+        private static void PrintOptions() {
+            Console.WriteLine("What election option would you like?");
+            Console.WriteLine("Options:");
+            Console.WriteLine("1) View All Elections");
+            Console.WriteLine("2) View Upcoming Elections I've Registered For");
+
+            if (CurrentUser.IsAdmin) {
+                Console.WriteLine("3) Create Election");
+                Console.WriteLine("4) Start Election");
+                Console.WriteLine("5) End Election");
+                Console.WriteLine("6) Update Election");
+                Console.WriteLine("7) Delete Election");
             }
         }
 

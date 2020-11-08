@@ -11,12 +11,7 @@ namespace ElectionVote.Services.Interactions.Options {
             Console.WriteLine("------ Candidates ------");
 
             do {
-                Console.WriteLine("What candidate option would you like?");
-                Console.WriteLine("Options:");
-                Console.WriteLine("1) View Election Candidates");
-                Console.WriteLine("2) Add Candidate To Election");
-                Console.WriteLine("3) Update Candidate");
-                Console.WriteLine("4) Delete Candidate");
+                PrintOptions();
 
                 try {
                     optionVal = int.Parse(Console.ReadLine());
@@ -44,6 +39,18 @@ namespace ElectionVote.Services.Interactions.Options {
                 default:
                     CommonFlow.InvalidValueWarning();
                     break;
+            }
+        }
+
+        private static void PrintOptions() {
+            Console.WriteLine("What candidate option would you like?");
+            Console.WriteLine("Options:");
+            Console.WriteLine("1) View Election Candidates");
+
+            if (CurrentUser.IsAdmin) {
+                Console.WriteLine("2) Add Candidate To Election");
+                Console.WriteLine("3) Update Candidate");
+                Console.WriteLine("4) Delete Candidate");
             }
         }
 

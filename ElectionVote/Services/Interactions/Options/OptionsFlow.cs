@@ -34,10 +34,9 @@ namespace ElectionVote.Services.Interactions.Options {
                     await RegistrationOptionsFlow.Interact();
                     break;
                 case 3: // Vote
+                    await VoteOptionsFlow.Interact();
                     break;
-                case 4: // My Account
-                    break;
-                case 5: // Candidates (admins)
+                case 4: // Candidates (admins)
                     await CandidateOptionsFlow.Interact();
                     break;
                 default:
@@ -51,9 +50,7 @@ namespace ElectionVote.Services.Interactions.Options {
             Console.WriteLine("1) Elections");
             Console.WriteLine("2) Election Registrations");
             Console.WriteLine("3) Vote");
-            Console.WriteLine("4) My Account");
-
-            if (CurrentUser.IsAdmin) Console.WriteLine("5) Candidates");
+            Console.WriteLine("4) Candidates");
         }
 
     }

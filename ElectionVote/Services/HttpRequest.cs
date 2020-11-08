@@ -10,9 +10,7 @@ namespace ElectionVote.Services {
         private static readonly HttpClient client = new HttpClient();
 
         public static async Task<String> Get(String url) {
-            HttpResponseMessage response;
-
-            response = await client.GetAsync(url);
+            HttpResponseMessage response= await client.GetAsync(url);
 
             response.EnsureSuccessStatusCode();
 
@@ -23,11 +21,9 @@ namespace ElectionVote.Services {
         }
 
         public static async Task<String> Post(String url, IRequest requestDto) {
-            HttpResponseMessage response;
-
             Console.WriteLine(JsonConvert.SerializeObject(requestDto));
 
-            response = await client.PostAsync(
+            HttpResponseMessage response = await client.PostAsync(
                 url,
                 new StringContent(
                     JsonConvert.SerializeObject(requestDto),
@@ -45,11 +41,9 @@ namespace ElectionVote.Services {
         }
 
         public static async Task<String> Put(String url, IRequest requestDto) {
-            HttpResponseMessage response;
-
             Console.WriteLine(JsonConvert.SerializeObject(requestDto));
 
-            response = await client.PutAsync(
+            HttpResponseMessage response = await client.PutAsync(
                 url,
                 new StringContent(
                     JsonConvert.SerializeObject(requestDto),
@@ -67,9 +61,7 @@ namespace ElectionVote.Services {
         }
 
         public static async Task<String> Delete(String url) {
-            HttpResponseMessage response;
-
-            response = await client.DeleteAsync(url);
+            HttpResponseMessage response = await client.DeleteAsync(url);
 
             response.EnsureSuccessStatusCode();
 
