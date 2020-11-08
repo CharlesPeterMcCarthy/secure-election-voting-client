@@ -11,6 +11,9 @@ namespace ElectionVote.Services.Models.Core {
         [JsonProperty("electionName")]
         public String ElectionName { get; set; }
 
+        [JsonProperty("electionStarted")]
+        public Boolean ElectionStarted { get; set; }
+
         [JsonProperty("electionFinished")]
         public Boolean ElectionFinished { get; set; }
 

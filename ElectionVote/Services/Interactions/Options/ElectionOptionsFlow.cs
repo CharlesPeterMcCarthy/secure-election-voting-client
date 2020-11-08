@@ -19,7 +19,7 @@ namespace ElectionVote.Services.Interactions.Options {
                 Console.WriteLine("4) View Upcoming Elections I've Registered For");
                 Console.WriteLine("5) Create Election");
                 Console.WriteLine("6) Start Election");
-                Console.WriteLine("7) Stop Election");
+                Console.WriteLine("7) End Election");
                 Console.WriteLine("8) Update Election");
                 Console.WriteLine("9) Delete Election");
 
@@ -45,7 +45,8 @@ namespace ElectionVote.Services.Interactions.Options {
                 case 6: // Start Election
                     await StartElectionFlow.Interact();
                     break;
-                case 7: // Finish Election
+                case 7: // End Election
+                    await EndElectionFlow.Interact();
                     break;
                 default:
                     CommonFlow.InvalidValueWarning();

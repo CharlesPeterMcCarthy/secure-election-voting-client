@@ -78,6 +78,22 @@ namespace ElectionVote.Services.Actions {
             }
         }
 
+        public static async Task<List<Election>> GetCurrentElections() {
+            try {
+                String response = await HttpRequest.Get($"{API.BASE_URL}/election/current");
+                GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
+
+                if (!repsonseObj.Success) throw new Exception("Failed to retrieve current elections");
+
+                List<Election> elections = repsonseObj.Elections;
+
+                return elections;
+            } catch (Exception e) {
+                Console.WriteLine("Unable to retrieve current elections");
+                return null;
+            }
+        }
+
         public static async Task<List<Election>> GetUserUnregisteredElections() {
             try {
                 String response = await HttpRequest.Get($"{API.BASE_URL}/election/all-registered/{CurrentUser.UserID}");
@@ -106,6 +122,22 @@ namespace ElectionVote.Services.Actions {
                 return true;
             } catch (Exception e) {
                 Console.WriteLine("Unable to start election");
+                return false;
+            }
+        }
+
+        public static async Task<bool> EndElection(String electionId) {
+            try {
+                String response = await HttpRequest.Put($"{API.BASE_URL}/election/finish/{electionId}", null);
+                UpdateElectionResponseDto repsonseObj = JsonConvert.DeserializeObject<UpdateElectionResponseDto>(response);
+
+                if (!repsonseObj.Success) throw new Exception("Failed to end election");
+
+                Election election = repsonseObj.Election;
+
+                return true;
+            } catch (Exception e) {
+                Console.WriteLine("Unable to end election");
                 return false;
             }
         }

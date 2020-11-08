@@ -9,7 +9,7 @@ namespace ElectionVote.Services.Interactions.Tasks {
 
         public static async Task Interact() {
             Console.Clear();
-            Console.WriteLine("------ Start Elections ------");
+            Console.WriteLine("------ Start Election ------");
             Console.WriteLine("Which election do you want to start?");
 
             try {
