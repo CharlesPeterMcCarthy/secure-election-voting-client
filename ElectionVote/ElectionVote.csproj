@@ -71,6 +71,7 @@
     <Compile Include="Services\DTO\Request\UpdateCandidateRequestDto.cs" />
     <Compile Include="Services\Models\IUpdatable.cs" />
     <Compile Include="Services\DTO\Response\UpdateCandidateResponseDto.cs" />
+    <Compile Include="Services\Interactions\CommonFlow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

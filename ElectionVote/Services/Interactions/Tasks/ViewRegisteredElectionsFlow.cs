@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ElectionVote.Services.Constants;
-using ElectionVote.Services.DTO.Response;
+using ElectionVote.Services.Actions;
 using ElectionVote.Services.Models.Core;
-using Newtonsoft.Json;
 
 namespace ElectionVote.Services.Interactions.Tasks {
     public static class ViewRegisteredElectionsFlow {
@@ -14,15 +12,10 @@ namespace ElectionVote.Services.Interactions.Tasks {
             Console.WriteLine("------ Your Upcoming Registered Elections ------");
 
             try {
-                String response = await HttpRequest.Get($"{API.BASE_URL}/election/all-registered/{CurrentUser.UserID}");
-                GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
-
-                if (!repsonseObj.Success) throw new Exception("Failed to retrieve elections");
-
-                List<Election> elections = repsonseObj.Elections;
+                List<Election> elections = await Elections.GetUserUnregisteredElections();
 
                 if (elections.Count > 0) {
-                    PrintElections(elections);
+                    CommonFlow.PrintElections(elections);
                 } else {
                     Console.WriteLine("You have no upcoming elections to display.");
                 }
@@ -30,16 +23,8 @@ namespace ElectionVote.Services.Interactions.Tasks {
                 Console.WriteLine(e);
                 Console.WriteLine("Unable to get elections");
             }
-            Console.Read();
-        }
 
-        private static void PrintElections(List<Election> elections) {
-            int i = 0;
-
-            elections.ForEach(e => {
-                i++;
-                Console.WriteLine($"{i}: {e.ElectionName}");
-            });
+            CommonFlow.EndFlowPrompt();
         }
 
     }
