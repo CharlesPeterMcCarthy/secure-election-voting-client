@@ -19,14 +19,12 @@ namespace ElectionVote.Services.Interactions.Options {
                     CommonFlow.InvalidValueWarning();
                     continue;
                 }
-            } while (optionVal < 1 || optionVal > 2);
+            } while (optionVal < 1 || optionVal > 1);
 
             Console.Clear();
 
             switch (optionVal) {
-                case 1: // View My Previous Votes
-                    break;
-                case 2: // Submit Vote
+                case 1: // Submit Vote
                     await SubmitVoteFlow.Interact();
                     break;
                 default:
@@ -36,10 +34,9 @@ namespace ElectionVote.Services.Interactions.Options {
         }
 
         private static void PrintOptions() {
-            Console.WriteLine("What voteing option would you like?");
+            Console.WriteLine("What voting option would you like?");
             Console.WriteLine("Options:");
-            Console.WriteLine("1) View My Previous Votes");
-            Console.WriteLine("2) Submit Vote");
+            Console.WriteLine("1) Submit Vote");
         }
 
     }

@@ -30,19 +30,22 @@ namespace ElectionVote.Services.Interactions.Options {
                 case 2: // View Registered Elections
                     await ViewRegisteredElectionsFlow.Interact();
                     break;
-                case 3: // Create Election
+                case 3: // View Election Results
+                    await ViewElectionResultsFlow.Interact();
+                    break;
+                case 4: // Create Election
                     await CreateElectionFlow.Interact();
                     break;
-                case 4: // Start Election
+                case 5: // Start Election
                     await StartElectionFlow.Interact();
                     break;
-                case 5: // End Election
+                case 6: // End Election
                     await EndElectionFlow.Interact();
                     break;
-                case 6: // Update Election
+                case 7: // Update Election
                     await UpdateElectionFlow.Interact();
                     break;
-                case 7: // Delete Election
+                case 8: // Delete Election
                     await DeleteElectionFlow.Interact();
                     break;
                 default:
@@ -56,13 +59,14 @@ namespace ElectionVote.Services.Interactions.Options {
             Console.WriteLine("Options:");
             Console.WriteLine("1) View All Elections");
             Console.WriteLine("2) View Upcoming Elections I've Registered For");
+            Console.WriteLine("3) View Election Results");
 
             if (CurrentUser.IsAdmin) {
-                Console.WriteLine("3) Create Election");
-                Console.WriteLine("4) Start Election");
-                Console.WriteLine("5) End Election");
-                Console.WriteLine("6) Update Election");
-                Console.WriteLine("7) Delete Election");
+                Console.WriteLine("4) Create Election");
+                Console.WriteLine("5) Start Election");
+                Console.WriteLine("6) End Election");
+                Console.WriteLine("7) Update Election");
+                Console.WriteLine("8) Delete Election");
             }
         }
 

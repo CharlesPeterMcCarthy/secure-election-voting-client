@@ -90,6 +90,8 @@
     <Compile Include="Services\Actions\BallotPaperActions.cs" />
     <Compile Include="Services\DTO\Response\GetBallotPaperResponseDto.cs" />
     <Compile Include="Services\DTO\Request\SubmitBallotPaperRequestDto.cs" />
+    <Compile Include="Services\Interactions\Tasks\Elections\ViewElectionResultsFlow.cs" />
+    <Compile Include="Services\DTO\Response\GetElectionResultsReponseDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

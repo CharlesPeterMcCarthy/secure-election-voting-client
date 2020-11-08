@@ -38,7 +38,7 @@ namespace ElectionVote.Services.Actions {
             }
         }
 
-        public static async Task<List<Election>> GetUFinishedElections() {
+        public static async Task<List<Election>> GetFinishedElections() {
             try {
                 String response = await HttpRequest.Get($"{API.BASE_URL}/election/finished");
                 GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
@@ -184,6 +184,20 @@ namespace ElectionVote.Services.Actions {
             } catch (Exception e) {
                 Console.WriteLine("Unable to delete election");
                 return false;
+            }
+        }
+
+        public static async Task<GetElectionResultsReponseDto> GetElectionResults(String electionId) {
+            try {
+                String response = await HttpRequest.Get($"{API.BASE_URL}/election/results/{electionId}");
+                GetElectionResultsReponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionResultsReponseDto>(response);
+
+                if (!repsonseObj.Success) throw new Exception("Failed to get election results");
+
+                return repsonseObj;
+            } catch (Exception e) {
+                Console.WriteLine("Unable to get election results");
+                return null;
             }
         }
 

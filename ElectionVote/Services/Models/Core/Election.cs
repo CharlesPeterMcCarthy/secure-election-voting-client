@@ -20,5 +20,8 @@ namespace ElectionVote.Services.Models.Core {
         [JsonProperty("candidates")]
         public List<Candidate> Candidates { get; set; }
 
+        [JsonProperty("winner")]
+        public Candidate Winner { get; set; }
+
     }
 }
