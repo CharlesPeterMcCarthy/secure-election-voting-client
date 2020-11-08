@@ -78,6 +78,8 @@
     <Compile Include="Services\Interactions\Tasks\Elections\ViewElectionsFlow.cs" />
     <Compile Include="Services\Interactions\Tasks\Elections\ViewRegisteredElectionsFlow.cs" />
     <Compile Include="Services\Interactions\Tasks\Elections\DeleteElectionFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\Elections\UpdateElectionFlow.cs" />
+    <Compile Include="Services\DTO\Request\UpdateElectionRequestDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

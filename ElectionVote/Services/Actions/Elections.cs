@@ -37,9 +37,7 @@ namespace ElectionVote.Services.Actions {
 
                 if (!repsonseObj.Success) throw new Exception("Failed to retrieve all elections");
 
-                List<Election> elections = repsonseObj.Elections;
-
-                return elections;
+                return repsonseObj.Elections;
             } catch (Exception e) {
                 Console.WriteLine("Unable to retrieve all elections");
                 return null;
@@ -53,9 +51,7 @@ namespace ElectionVote.Services.Actions {
 
                 if (!repsonseObj.Success) throw new Exception("Failed to retrieve upcoming elections");
 
-                List<Election> elections = repsonseObj.Elections;
-
-                return elections;
+                return repsonseObj.Elections;
             } catch (Exception e) {
                 Console.WriteLine("Unable to retrieve upcoming elections");
                 return null;
@@ -69,9 +65,7 @@ namespace ElectionVote.Services.Actions {
 
                 if (!repsonseObj.Success) throw new Exception("Failed to retrieve finished elections");
 
-                List<Election> elections = repsonseObj.Elections;
-
-                return elections;
+                return repsonseObj.Elections;
             } catch (Exception e) {
                 Console.WriteLine("Unable to retrieve finished elections");
                 return null;
@@ -85,9 +79,7 @@ namespace ElectionVote.Services.Actions {
 
                 if (!repsonseObj.Success) throw new Exception("Failed to retrieve current elections");
 
-                List<Election> elections = repsonseObj.Elections;
-
-                return elections;
+                return repsonseObj.Elections;
             } catch (Exception e) {
                 Console.WriteLine("Unable to retrieve current elections");
                 return null;
@@ -101,9 +93,7 @@ namespace ElectionVote.Services.Actions {
 
                 if (!repsonseObj.Success) throw new Exception("Failed to retrieve unregistered elections");
 
-                List<Election> elections = repsonseObj.Elections;
-
-                return elections;
+                return repsonseObj.Elections;
             } catch (Exception e) {
                 Console.WriteLine("Unable to retrieve unregistered elections");
                 return null;
@@ -122,9 +112,7 @@ namespace ElectionVote.Services.Actions {
 
                 if (!repsonseObj.Success) throw new Exception("Failed to create election");
 
-                Election created = repsonseObj.Election;
-
-                return created;
+                return repsonseObj.Election;
             } catch (Exception e) {
                 Console.WriteLine("Unable to create election");
                 return null;
@@ -156,6 +144,24 @@ namespace ElectionVote.Services.Actions {
             } catch (Exception e) {
                 Console.WriteLine("Unable to end election");
                 return false;
+            }
+        }
+
+        public static async Task<Election> UpdateElection(Election election) {
+            UpdateElectionRequestDto dto = new UpdateElectionRequestDto() {
+                Election = election
+            };
+
+            try {
+                String response = await HttpRequest.Put($"{API.BASE_URL}/election", dto);
+                ElectionResponseDto repsonseObj = JsonConvert.DeserializeObject<ElectionResponseDto>(response);
+
+                if (!repsonseObj.Success) throw new Exception("Failed to update election");
+
+                return repsonseObj.Election;
+            } catch (Exception e) {
+                Console.WriteLine("Unable to update election");
+                return null;
             }
         }
 

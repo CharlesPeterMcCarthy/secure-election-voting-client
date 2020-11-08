@@ -49,6 +49,9 @@ namespace ElectionVote.Services.Interactions.Options {
                 case 7: // End Election
                     await EndElectionFlow.Interact();
                     break;
+                case 8: // Update Election
+                    await UpdateElectionFlow.Interact();
+                    break;
                 case 9: // Delete Election
                     await DeleteElectionFlow.Interact();
                     break;

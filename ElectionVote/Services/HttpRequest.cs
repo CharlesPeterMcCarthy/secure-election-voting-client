@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using ElectionVote.Services.DTO.Request;
-using ElectionVote.Services.Models;
 using Newtonsoft.Json;
 
 namespace ElectionVote.Services {
@@ -46,7 +44,7 @@ namespace ElectionVote.Services {
             return responseString;
         }
 
-        public static async Task<String> Put(String url, IUpdatable requestDto) {
+        public static async Task<String> Put(String url, IRequest requestDto) {
             HttpResponseMessage response;
 
             Console.WriteLine(JsonConvert.SerializeObject(requestDto));

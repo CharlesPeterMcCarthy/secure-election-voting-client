@@ -48,8 +48,12 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<Candidate> UpdateCandidate(Candidate candidate) {
+            UpdateCandidateRequestDto dto = new UpdateCandidateRequestDto() {
+                Candidate = candidate
+            };
+
             try {
-                String response = await HttpRequest.Put($"{API.BASE_URL}/candidate", candidate);
+                String response = await HttpRequest.Put($"{API.BASE_URL}/candidate", dto);
 
                 UpdateCandidateResponseDto repsonseObj = JsonConvert.DeserializeObject<UpdateCandidateResponseDto>(response);
 
@@ -57,7 +61,7 @@ namespace ElectionVote.Services.Actions {
 
                 return repsonseObj.Candidate;
             } catch (Exception e) {
-                Console.WriteLine("Unable to delete Candidate");
+                Console.WriteLine("Unable to update Candidate");
                 return null;
             }
         }

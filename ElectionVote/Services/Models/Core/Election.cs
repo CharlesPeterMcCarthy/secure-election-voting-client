@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace ElectionVote.Services.Models.Core {
-    public class Election {
+    public class Election : IUpdatable {
 
         [JsonProperty("electionId")]
         public String ElectionId { get; set; }
