@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElectionVote.Services.Constants;
 using ElectionVote.Services.DTO.Request;
 using ElectionVote.Services.DTO.Response;
+using ElectionVote.Services.Models.Core;
 using Newtonsoft.Json;
 
 namespace ElectionVote.Services.Actions {
@@ -26,7 +28,70 @@ namespace ElectionVote.Services.Actions {
                 Console.WriteLine("Unable to register for election");
                 return false;
             }
+        }
 
+        public static async Task<List<Election>> GetAllElections() {
+            try {
+                String response = await HttpRequest.Get($"{API.BASE_URL}/election/all");
+                GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
+
+                if (!repsonseObj.Success) throw new Exception("Failed to retrieve all elections");
+
+                List<Election> elections = repsonseObj.Elections;
+
+                return elections;
+            } catch (Exception e) {
+                Console.WriteLine("Unable to retrieve all elections");
+                return null;
+            }
+        }
+
+        public static async Task<List<Election>> GetUpcomingElections() {
+            try {
+                String response = await HttpRequest.Get($"{API.BASE_URL}/election/upcoming");
+                GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
+
+                if (!repsonseObj.Success) throw new Exception("Failed to retrieve upcoming elections");
+
+                List<Election> elections = repsonseObj.Elections;
+
+                return elections;
+            } catch (Exception e) {
+                Console.WriteLine("Unable to retrieve upcoming elections");
+                return null;
+            }
+        }
+
+        public static async Task<List<Election>> GetUFinishedElections() {
+            try {
+                String response = await HttpRequest.Get($"{API.BASE_URL}/election/finished");
+                GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
+
+                if (!repsonseObj.Success) throw new Exception("Failed to retrieve finished elections");
+
+                List<Election> elections = repsonseObj.Elections;
+
+                return elections;
+            } catch (Exception e) {
+                Console.WriteLine("Unable to retrieve finished elections");
+                return null;
+            }
+        }
+
+        public static async Task<List<Election>> GetUserUnregisteredElections() {
+            try {
+                String response = await HttpRequest.Get($"{API.BASE_URL}/election/all-registered/{CurrentUser.UserID}");
+                GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
+
+                if (!repsonseObj.Success) throw new Exception("Failed to retrieve unregistered elections");
+
+                List<Election> elections = repsonseObj.Elections;
+
+                return elections;
+            } catch (Exception e) {
+                Console.WriteLine("Unable to retrieve unregistered elections");
+                return null;
+            }
         }
 
     }
