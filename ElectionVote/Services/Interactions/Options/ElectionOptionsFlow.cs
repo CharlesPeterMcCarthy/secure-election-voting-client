@@ -19,7 +19,7 @@ namespace ElectionVote.Services.Interactions.Options {
                     CommonFlow.InvalidValueWarning();
                     continue;
                 }
-            } while (optionVal < 1 || optionVal > 7);
+            } while (optionVal < 1 || optionVal > 8);
 
             Console.Clear();
 

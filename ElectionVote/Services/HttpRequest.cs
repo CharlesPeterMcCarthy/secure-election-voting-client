@@ -21,8 +21,6 @@ namespace ElectionVote.Services {
         }
 
         public static async Task<String> Post(String url, IRequest requestDto) {
-            Console.WriteLine(JsonConvert.SerializeObject(requestDto));
-
             HttpResponseMessage response = await client.PostAsync(
                 url,
                 new StringContent(
@@ -41,8 +39,6 @@ namespace ElectionVote.Services {
         }
 
         public static async Task<String> Put(String url, IRequest requestDto) {
-            Console.WriteLine(JsonConvert.SerializeObject(requestDto));
-
             HttpResponseMessage response = await client.PutAsync(
                 url,
                 new StringContent(

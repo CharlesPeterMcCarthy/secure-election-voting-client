@@ -11,19 +11,19 @@ namespace ElectionVote {
         public static async System.Threading.Tasks.Task Main(string[] args) {
             Console.WriteLine("Welcome to the Election Voting App!\n");
 
-            //User user = await AuthFlow.Interact();
-            //User user = await Auth.Login("test@test.com");
-            User user = new User() {
-                FirstName = "CHarles",
-                LastName = "McCarthy III",
-                Email = "chaz@test.com",
-                UserType = UserType.ADMIN,
-                UserId = "fb926a58-d1ca-4746-aae3-abe8d8dad6ed"
-            };
+            User user = await AuthFlow.Interact();
+
+            //User user = new User() {
+            //    FirstName = "CHarles",
+            //    LastName = "McCarthy III",
+            //    Email = "chaz@test.com",
+            //    UserType = UserType.ADMIN,
+            //    UserId = "fb926a58-d1ca-4746-aae3-abe8d8dad6ed"
+            //};
             CurrentUser.SetCurrentUser(user);
 
-            //Console.Clear();
-            //Console.WriteLine($"Hi {user.FirstName}!");
+            Console.Clear();
+            Console.WriteLine($"Hi {user.FirstName}!");
             await OptionsFlow.InteractAsync();
 
             Console.Read();
