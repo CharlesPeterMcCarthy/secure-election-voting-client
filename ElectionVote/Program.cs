@@ -1,7 +1,5 @@
 ﻿using System;
 using ElectionVote.Services;
-using ElectionVote.Services.Actions;
-using ElectionVote.Services.Enums;
 using ElectionVote.Services.Interactions;
 using ElectionVote.Services.Interactions.Options;
 using ElectionVote.Services.Models;

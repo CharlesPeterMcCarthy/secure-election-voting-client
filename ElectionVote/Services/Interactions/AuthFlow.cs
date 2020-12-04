@@ -10,7 +10,6 @@ namespace ElectionVote.Services.Interactions {
         public static async Task<User> Interact() {
             User user = null;
             int entryVal = 0;
-            int userTypeVal = 0;
 
             do {
                 Console.WriteLine("Are you Logging in or Signing up?");
@@ -28,28 +27,13 @@ namespace ElectionVote.Services.Interactions {
 
             Console.Clear();
 
-            do {
-                Console.WriteLine("Are you a Voter or Admin?");
-                Console.WriteLine("Enter 1 for Voter or 2 for Admin.\n");
-
-                try {
-                    userTypeVal = int.Parse(Console.ReadLine());
-                } catch (FormatException) {
-                    InvalidValueWarning();
-                    continue;
-                }
-
-                Console.Clear();
-
-                if (entryVal == 1) { // Logging in
-                    user = await LoginFlow();
-                } else if (entryVal == 2) { // Signing up
-                    user = await SignUpFlow(userTypeVal);
-                } else {
-                    InvalidValueWarning();
-                }
-
-            } while (userTypeVal != 1 && userTypeVal != 2);
+            if (entryVal == 1) { // Logging in
+                user = await LoginFlow();
+            } else if (entryVal == 2) { // Signing up
+                user = await SignUpFlow();
+            } else {
+                InvalidValueWarning();
+            }
 
             return user;
         }
@@ -69,7 +53,7 @@ namespace ElectionVote.Services.Interactions {
             return user;
         }
 
-        private static async Task<User> SignUpFlow(int userTypeVal) {
+        private static async Task<User> SignUpFlow() {
             User user = null;
 
             do {
@@ -81,7 +65,6 @@ namespace ElectionVote.Services.Interactions {
                 String email = Console.ReadLine();
 
                 UserType userType = UserType.VOTER;
-                if (userTypeVal == 2) userType = UserType.ADMIN;
 
                 user = await Auth.SignUp(firstName, lastName, email, userType);
 

@@ -27,7 +27,7 @@ namespace ElectionVote.Services.Interactions.Options {
             Console.Clear();
 
             switch (optionSectionVal) {
-                case 1: // Elecctions
+                case 1: // Elections
                     await ElectionOptionsFlow.Interact();
                     break;
                 case 2: // Registrations
