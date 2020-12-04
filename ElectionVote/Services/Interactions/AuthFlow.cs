@@ -39,7 +39,7 @@ namespace ElectionVote.Services.Interactions {
         }
 
         private static async Task<User> LoginFlow() {
-            User user = null;
+            User user;
 
             do {
                 Console.Write("Enter your Email Address: ");
@@ -54,7 +54,7 @@ namespace ElectionVote.Services.Interactions {
         }
 
         private static async Task<User> SignUpFlow() {
-            User user = null;
+            User user;
 
             do {
                 Console.Write("Enter first name: ");

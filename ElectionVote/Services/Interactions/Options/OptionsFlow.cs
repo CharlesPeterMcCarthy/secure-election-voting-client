@@ -1,8 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using ElectionVote.Services.Models;
 
 namespace ElectionVote.Services.Interactions.Options {
     public static class OptionsFlow {
+
+        private static List<NavigationOption> NavigationOptions = new List<NavigationOption>() {
+            new NavigationOption() {
+                Name = "Elections",
+                Action = ElectionOptionsFlow.Interact
+            },
+            new NavigationOption() {
+                Name = "Election Registrations",
+                Action = RegistrationOptionsFlow.Interact,
+                IsAccessibleToAll = false,
+                IsVoterOnly = true
+            },
+            new NavigationOption() {
+                Name = "Vote",
+                Action = VoteOptionsFlow.Interact,
+                IsAccessibleToAll = false,
+                IsVoterOnly = true
+            },
+            new NavigationOption() {
+                Name = "Candidates",
+                Action = CandidateOptionsFlow.Interact
+            }
+        };
 
         public static async Task InteractAsync() {
             while (true) {
@@ -14,7 +39,7 @@ namespace ElectionVote.Services.Interactions.Options {
             int optionSectionVal = 0;
 
             do {
-                PrintOptions();
+                CommonFlow.PrintOptions(NavigationOptions);
 
                 try {
                     optionSectionVal = int.Parse(Console.ReadLine());
@@ -22,35 +47,13 @@ namespace ElectionVote.Services.Interactions.Options {
                     CommonFlow.InvalidValueWarning();
                     continue;
                 }
-            } while (optionSectionVal < 1 || optionSectionVal > 5);
+
+                if (optionSectionVal < 1 || optionSectionVal >= NavigationOptions.Count) CommonFlow.InvalidValueWarning();
+            } while (optionSectionVal < 1 || optionSectionVal >= NavigationOptions.Count);
 
             Console.Clear();
 
-            switch (optionSectionVal) {
-                case 1: // Elections
-                    await ElectionOptionsFlow.Interact();
-                    break;
-                case 2: // Registrations
-                    await RegistrationOptionsFlow.Interact();
-                    break;
-                case 3: // Vote
-                    await VoteOptionsFlow.Interact();
-                    break;
-                case 4: // Candidates (admins)
-                    await CandidateOptionsFlow.Interact();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private static void PrintOptions() {
-            Console.WriteLine("What type of options would like?");
-            Console.WriteLine("Options:");
-            Console.WriteLine("1) Elections");
-            Console.WriteLine("2) Election Registrations");
-            Console.WriteLine("3) Vote");
-            Console.WriteLine("4) Candidates");
+            await NavigationOptions[optionSectionVal - 1].Action();
         }
 
     }

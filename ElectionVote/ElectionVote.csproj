@@ -92,6 +92,7 @@
     <Compile Include="Services\DTO\Request\SubmitBallotPaperRequestDto.cs" />
     <Compile Include="Services\Interactions\Tasks\Elections\ViewElectionResultsFlow.cs" />
     <Compile Include="Services\DTO\Response\GetElectionResultsReponseDto.cs" />
+    <Compile Include="Services\Models\NavigationOption.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ElectionVote.Services.Models;
 using ElectionVote.Services.Models.Core;
 
 namespace ElectionVote.Services.Interactions {
@@ -74,6 +75,19 @@ namespace ElectionVote.Services.Interactions {
             } while (candidateVal < 1 || candidateVal > candidates.Count);
 
             return selectedCandidate;
+        }
+
+        public static void PrintOptions(List<NavigationOption> navigationOptions) {
+            int index = 0;
+            Console.WriteLine("What type of options would like?");
+            Console.WriteLine("Options:");
+
+            navigationOptions.ForEach(option => {
+                if (option.IsAccessibleToAll || (option.IsAdminOnly && CurrentUser.IsAdmin) || (option.IsVoterOnly && !CurrentUser.IsAdmin)) {
+                    index++;
+                    Console.WriteLine($"{index}) {option.Name}");
+                }
+            });
         }
 
         public static void InvalidValueWarning() {
