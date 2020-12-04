@@ -16,7 +16,7 @@ namespace ElectionVote {
                 FirstName = "CHarles",
                 LastName = "McCarthy III",
                 Email = "chaz@test.com",
-                UserType = UserType.VOTER,
+                UserType = UserType.ADMIN,
                 UserId = "fb926a58-d1ca-4746-aae3-abe8d8dad6ed"
             };
             CurrentUser.SetCurrentUser(user);

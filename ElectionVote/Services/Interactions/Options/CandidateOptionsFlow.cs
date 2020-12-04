@@ -1,57 +1,59 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElectionVote.Services.Interactions.Tasks.Candidates;
+using ElectionVote.Services.Models;
 
 namespace ElectionVote.Services.Interactions.Options {
     public static class CandidateOptionsFlow {
 
+        private static List<NavigationOption> NavigationOptions = new List<NavigationOption>() {
+            new NavigationOption() {
+                Name = "View Election Candidates",
+                Action = ViewCandidatesFlow.Interact
+            },
+            new NavigationOption() {
+                Name = "Add Candidate To Election",
+                Action = AddCandidateToElectionFlow.Interact,
+                IsAccessibleToAll = false,
+                IsAdminOnly = true
+            },
+            new NavigationOption() {
+                Name = "Update Candidate",
+                Action = UpdateCandidateFlow.Interact,
+                IsAccessibleToAll = false,
+                IsAdminOnly = true
+            },
+            new NavigationOption() {
+                Name = "Delete Candidate",
+                Action = DeleteCandidateFlow.Interact,
+                IsAccessibleToAll = false,
+                IsAdminOnly = true
+            }
+        };
+
         public static async Task Interact() {
-            int optionVal = 0;
+            int selectedNavOption = 0;
+            var userFilteredOptions = CommonFlow.FilterNavigationOptions(NavigationOptions);
 
             Console.WriteLine("------ Candidates ------");
 
             do {
-                PrintOptions();
+                CommonFlow.PrintNavigationOptions(userFilteredOptions, "candidate");
 
                 try {
-                    optionVal = int.Parse(Console.ReadLine());
+                    selectedNavOption = int.Parse(Console.ReadLine());
                 } catch (FormatException) {
                     CommonFlow.InvalidValueWarning();
                     continue;
                 }
-            } while (optionVal < 1 || optionVal > 4);
+
+                if (selectedNavOption < 1 || selectedNavOption > userFilteredOptions.Count) CommonFlow.InvalidValueWarning();
+            } while (selectedNavOption < 1 || selectedNavOption > userFilteredOptions.Count);
 
             Console.Clear();
 
-            switch (optionVal) {
-                case 1: // View Election Candidates
-                    await ViewCandidatesFlow.Interact();
-                    break;
-                case 2: // Add Candidate To Election
-                    await AddCandidateToElectionFlow.Interact();
-                    break;
-                case 3: // Update Candidate
-                    await UpdateCandidateFlow.Interact();
-                    break;
-                case 4: // Delete Candidate
-                    await DeleteCandidateFlow.Interact();
-                    break;
-                default:
-                    CommonFlow.InvalidValueWarning();
-                    break;
-            }
-        }
-
-        private static void PrintOptions() {
-            Console.WriteLine("What candidate option would you like?");
-            Console.WriteLine("Options:");
-            Console.WriteLine("1) View Election Candidates");
-
-            if (CurrentUser.IsAdmin) {
-                Console.WriteLine("2) Add Candidate To Election");
-                Console.WriteLine("3) Update Candidate");
-                Console.WriteLine("4) Delete Candidate");
-            }
+            await userFilteredOptions[selectedNavOption - 1].Action();
         }
 
     }
