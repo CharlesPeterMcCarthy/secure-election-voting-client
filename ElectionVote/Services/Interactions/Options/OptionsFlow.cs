@@ -30,13 +30,11 @@ namespace ElectionVote.Services.Interactions.Options {
         };
 
         public static async Task InteractAsync() {
-            while (true) {
-                await Options();
-            }
+            while (true) await Options();
         }
 
         private static async Task Options() {
-            int optionSectionVal = 0;
+            int selectedNavOption = 0;
 
             var userFilteredOptions = CommonFlow.FilterNavigationOptions(NavigationOptions);
 
@@ -44,18 +42,18 @@ namespace ElectionVote.Services.Interactions.Options {
                 CommonFlow.PrintNavigationOptions(userFilteredOptions);
 
                 try {
-                    optionSectionVal = int.Parse(Console.ReadLine());
+                    selectedNavOption = int.Parse(Console.ReadLine());
                 } catch (FormatException) {
                     CommonFlow.InvalidValueWarning();
                     continue;
                 }
 
-                if (optionSectionVal < 1 || optionSectionVal > userFilteredOptions.Count) CommonFlow.InvalidValueWarning();
-            } while (optionSectionVal < 1 || optionSectionVal > userFilteredOptions.Count);
+                if (selectedNavOption < 1 || selectedNavOption > userFilteredOptions.Count) CommonFlow.InvalidValueWarning();
+            } while (selectedNavOption < 1 || selectedNavOption > userFilteredOptions.Count);
 
             Console.Clear();
 
-            await userFilteredOptions[optionSectionVal - 1].Action();
+            await userFilteredOptions[selectedNavOption - 1].Action();
         }
 
     }

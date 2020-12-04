@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElectionVote.Services.Actions;
 using ElectionVote.Services.Enums;
@@ -7,33 +8,38 @@ using ElectionVote.Services.Models;
 namespace ElectionVote.Services.Interactions {
     public static class AuthFlow {
 
+        private static List<NavigationOption> NavigationOptions = new List<NavigationOption>() {
+            new NavigationOption() {
+                Name = "Login",
+                Action = LoginFlow
+            },
+            new NavigationOption() {
+                Name = "Sign Up",
+                Action = SignUpFlow
+            }
+        };
+
         public static async Task<User> Interact() {
             User user = null;
-            int entryVal = 0;
+            int selectedVal = 0;
 
             do {
-                Console.WriteLine("Are you Logging in or Signing up?");
-                Console.WriteLine("Enter 1 for Logging in or 2 for Signing up.\n");
+                Console.Write("Are you Logging in or Signing up? ");
+                CommonFlow.PrintNavigationOptions(NavigationOptions);
 
                 try {
-                    entryVal = int.Parse(Console.ReadLine());
+                    selectedVal = int.Parse(Console.ReadLine());
                 } catch (FormatException) {
-                    InvalidValueWarning();
+                    CommonFlow.InvalidValueWarning();
                     continue;
                 }
 
-                if (entryVal != 1 && entryVal != 2) InvalidValueWarning();
-            } while (entryVal != 1 && entryVal != 2);
+                if (selectedVal < 1 || selectedVal > NavigationOptions.Count) CommonFlow.InvalidValueWarning();
+            } while (selectedVal < 1 || selectedVal > NavigationOptions.Count);
 
             Console.Clear();
 
-            if (entryVal == 1) { // Logging in
-                user = await LoginFlow();
-            } else if (entryVal == 2) { // Signing up
-                user = await SignUpFlow();
-            } else {
-                InvalidValueWarning();
-            }
+            await NavigationOptions[selectedVal - 1].Action();
 
             return user;
         }
@@ -72,10 +78,6 @@ namespace ElectionVote.Services.Interactions {
             } while (user == null);
 
             return user;
-        }
-
-        private static void InvalidValueWarning() {
-            Console.WriteLine("You entered an invalid value!\n");
         }
 
     }
