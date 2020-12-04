@@ -38,8 +38,10 @@ namespace ElectionVote.Services.Interactions.Options {
         private static async Task Options() {
             int optionSectionVal = 0;
 
+            var userFilteredOptions = CommonFlow.FilterNavigationOptions(NavigationOptions);
+
             do {
-                CommonFlow.PrintOptions(NavigationOptions);
+                CommonFlow.PrintNavigationOptions(userFilteredOptions);
 
                 try {
                     optionSectionVal = int.Parse(Console.ReadLine());
@@ -48,12 +50,12 @@ namespace ElectionVote.Services.Interactions.Options {
                     continue;
                 }
 
-                if (optionSectionVal < 1 || optionSectionVal >= NavigationOptions.Count) CommonFlow.InvalidValueWarning();
-            } while (optionSectionVal < 1 || optionSectionVal >= NavigationOptions.Count);
+                if (optionSectionVal < 1 || optionSectionVal > userFilteredOptions.Count) CommonFlow.InvalidValueWarning();
+            } while (optionSectionVal < 1 || optionSectionVal > userFilteredOptions.Count);
 
             Console.Clear();
 
-            await NavigationOptions[optionSectionVal - 1].Action();
+            await userFilteredOptions[optionSectionVal - 1].Action();
         }
 
     }

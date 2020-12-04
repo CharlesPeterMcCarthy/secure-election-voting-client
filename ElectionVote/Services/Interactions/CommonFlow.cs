@@ -77,7 +77,7 @@ namespace ElectionVote.Services.Interactions {
             return selectedCandidate;
         }
 
-        public static void PrintOptions(List<NavigationOption> navigationOptions) {
+        public static void PrintNavigationOptions(List<NavigationOption> navigationOptions) {
             int index = 0;
             Console.WriteLine("What type of options would like?");
             Console.WriteLine("Options:");
@@ -88,6 +88,11 @@ namespace ElectionVote.Services.Interactions {
                     Console.WriteLine($"{index}) {option.Name}");
                 }
             });
+        }
+
+        public static List<NavigationOption> FilterNavigationOptions(List<NavigationOption> navigationOptions) {
+            if (CurrentUser.IsAdmin) return navigationOptions.FindAll(option => option.IsAccessibleToAll || option.IsAdminOnly);
+            return navigationOptions.FindAll(option => option.IsAccessibleToAll || option.IsVoterOnly);
         }
 
         public static void InvalidValueWarning() {
