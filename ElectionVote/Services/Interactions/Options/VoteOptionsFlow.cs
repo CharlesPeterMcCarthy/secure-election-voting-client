@@ -1,42 +1,42 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElectionVote.Services.Interactions.Tasks.Votes;
+using ElectionVote.Services.Models;
 
 namespace ElectionVote.Services.Interactions.Options {
     public static class VoteOptionsFlow {
 
+        private static List<NavigationOption> NavigationOptions = new List<NavigationOption>() {
+            new NavigationOption() {
+                Name = "Submit Vote",
+                Action = SubmitVoteFlow.Interact,
+                IsAccessibleToAll = false,
+                IsVoterOnly = true
+            }
+        };
+
         public static async Task Interact() {
-            int optionVal = 0;
+            int selectedNavOption = 0;
 
             Console.WriteLine("------ Voting ------");
 
             do {
-                PrintOptions();
+                CommonFlow.PrintNavigationOptions(NavigationOptions, "voting");
 
                 try {
-                    optionVal = int.Parse(Console.ReadLine());
+                    selectedNavOption = int.Parse(Console.ReadLine());
                 } catch (FormatException) {
                     CommonFlow.InvalidValueWarning();
                     continue;
                 }
-            } while (optionVal < 1 || optionVal > 1);
+
+                if (selectedNavOption < 1 || selectedNavOption > NavigationOptions.Count) CommonFlow.InvalidValueWarning();
+            } while (selectedNavOption < 1 || selectedNavOption > NavigationOptions.Count);
 
             Console.Clear();
 
-            switch (optionVal) {
-                case 1: // Submit Vote
-                    await SubmitVoteFlow.Interact();
-                    break;
-                default:
-                    CommonFlow.InvalidValueWarning();
-                    break;
-            }
-        }
-
-        private static void PrintOptions() {
-            Console.WriteLine("What voting option would you like?");
-            Console.WriteLine("Options:");
-            Console.WriteLine("1) Submit Vote");
+            await NavigationOptions[selectedNavOption - 1].Action();
         }
 
     }
