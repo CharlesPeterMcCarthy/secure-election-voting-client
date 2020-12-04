@@ -1,73 +1,83 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElectionVote.Services.Interactions.Tasks.Elections;
+using ElectionVote.Services.Models;
 
 namespace ElectionVote.Services.Interactions.Options {
     public static class ElectionOptionsFlow {
 
+        private static List<NavigationOption> NavigationOptions = new List<NavigationOption>() {
+            new NavigationOption() {
+                Name = "View All Elections",
+                Action = ViewElectionsFlow.Interact
+            },
+            new NavigationOption() {
+                Name = "View Upcoming Elections I've Registered For",
+                Action = ViewRegisteredElectionsFlow.Interact,
+                IsAccessibleToAll = false,
+                IsVoterOnly = true
+            },
+            new NavigationOption() {
+                Name = "View Election Results",
+                Action = ViewElectionResultsFlow.Interact,
+                IsAccessibleToAll = false,
+                IsAdminOnly = true
+            },
+            new NavigationOption() {
+                Name = "Create Election",
+                Action = CreateElectionFlow.Interact,
+                IsAccessibleToAll = false,
+                IsAdminOnly = true
+            },
+            new NavigationOption() {
+                Name = "Start Election",
+                Action = StartElectionFlow.Interact,
+                IsAccessibleToAll = false,
+                IsAdminOnly = true
+            },
+            new NavigationOption() {
+                Name = "End Election",
+                Action = EndElectionFlow.Interact,
+                IsAccessibleToAll = false,
+                IsAdminOnly = true
+            },
+            new NavigationOption() {
+                Name = "Update Election Details",
+                Action = UpdateElectionFlow.Interact,
+                IsAccessibleToAll = false,
+                IsAdminOnly = true
+            },
+            new NavigationOption() {
+                Name = "Delete Election",
+                Action = DeleteElectionFlow.Interact,
+                IsAccessibleToAll = false,
+                IsAdminOnly = true
+            },
+        };
+
         public static async Task Interact() {
-            int optionVal = 0;
+            int selectedNavOption = 0;
+            var userFilteredOptions = CommonFlow.FilterNavigationOptions(NavigationOptions);
 
             Console.WriteLine("------ Elections ------");
 
             do {
-                PrintOptions();
+                CommonFlow.PrintNavigationOptions(userFilteredOptions, "election");
 
                 try {
-                    optionVal = int.Parse(Console.ReadLine());
+                    selectedNavOption = int.Parse(Console.ReadLine());
                 } catch (FormatException) {
                     CommonFlow.InvalidValueWarning();
                     continue;
                 }
-            } while (optionVal < 1 || optionVal > 8);
+
+                if (selectedNavOption < 1 || selectedNavOption > userFilteredOptions.Count) CommonFlow.InvalidValueWarning();
+            } while (selectedNavOption < 1 || selectedNavOption > userFilteredOptions.Count);
 
             Console.Clear();
 
-            switch (optionVal) {
-                case 1: // View All Elections
-                    await ViewElectionsFlow.Interact();
-                    break;
-                case 2: // View Registered Elections
-                    await ViewRegisteredElectionsFlow.Interact();
-                    break;
-                case 3: // View Election Results
-                    await ViewElectionResultsFlow.Interact();
-                    break;
-                case 4: // Create Election
-                    await CreateElectionFlow.Interact();
-                    break;
-                case 5: // Start Election
-                    await StartElectionFlow.Interact();
-                    break;
-                case 6: // End Election
-                    await EndElectionFlow.Interact();
-                    break;
-                case 7: // Update Election
-                    await UpdateElectionFlow.Interact();
-                    break;
-                case 8: // Delete Election
-                    await DeleteElectionFlow.Interact();
-                    break;
-                default:
-                    CommonFlow.InvalidValueWarning();
-                    break;
-            }
-        }
-
-        private static void PrintOptions() {
-            Console.WriteLine("What election option would you like?");
-            Console.WriteLine("Options:");
-            Console.WriteLine("1) View All Elections");
-            Console.WriteLine("2) View Upcoming Elections I've Registered For");
-            Console.WriteLine("3) View Election Results");
-
-            if (CurrentUser.IsAdmin) {
-                Console.WriteLine("4) Create Election");
-                Console.WriteLine("5) Start Election");
-                Console.WriteLine("6) End Election");
-                Console.WriteLine("7) Update Election");
-                Console.WriteLine("8) Delete Election");
-            }
+            await userFilteredOptions[selectedNavOption - 1].Action();
         }
 
     }

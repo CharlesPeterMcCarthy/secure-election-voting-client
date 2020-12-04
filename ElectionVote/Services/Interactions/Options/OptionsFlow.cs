@@ -35,11 +35,10 @@ namespace ElectionVote.Services.Interactions.Options {
 
         private static async Task Options() {
             int selectedNavOption = 0;
-
             var userFilteredOptions = CommonFlow.FilterNavigationOptions(NavigationOptions);
 
             do {
-                CommonFlow.PrintNavigationOptions(userFilteredOptions);
+                CommonFlow.PrintNavigationOptions(userFilteredOptions, "area");
 
                 try {
                     selectedNavOption = int.Parse(Console.ReadLine());

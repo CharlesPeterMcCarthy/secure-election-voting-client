@@ -25,7 +25,7 @@ namespace ElectionVote.Services.Interactions {
 
             do {
                 Console.Write("Are you Logging in or Signing up? ");
-                CommonFlow.PrintNavigationOptions(NavigationOptions);
+                CommonFlow.PrintNavigationOptions(NavigationOptions, "authentication");
 
                 try {
                     selectedVal = int.Parse(Console.ReadLine());

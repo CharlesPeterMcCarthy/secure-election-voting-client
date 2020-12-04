@@ -77,9 +77,9 @@ namespace ElectionVote.Services.Interactions {
             return selectedCandidate;
         }
 
-        public static void PrintNavigationOptions(List<NavigationOption> navigationOptions) {
+        public static void PrintNavigationOptions(List<NavigationOption> navigationOptions, String optionsSection) {
             int index = 0;
-            Console.WriteLine("What option would you like?");
+            Console.WriteLine($"What {optionsSection} option would you like?");
             Console.WriteLine("Options:");
 
             navigationOptions.ForEach(option => {
