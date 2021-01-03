@@ -26,7 +26,7 @@ namespace ElectionVote {
             //};
             CurrentUser.SetCurrentUser(user);
 
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine($"Hi {user.FirstName}!");
 
             try {
@@ -44,10 +44,12 @@ namespace ElectionVote {
             //Encrypt();
             //HMAC();
             //string salt = Console.ReadLine();
-            //Test(salt);
+            //string password = Console.ReadLine();
+            //Test(salt, password);
+            //Test2();
         }
 
-        static void Test(string s) {
+        static void Test(string s, string p) {
             //byte[] bytes;
             //using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256)) {
             //    bytes = deriveBytes.GetBytes(PBKDF2SubkeyLength);
@@ -57,7 +59,44 @@ namespace ElectionVote {
             var salt = Encoding.ASCII.GetBytes(s);
             //Console.WriteLine(Convert.ToBase64String(salt));
 
-            var hashedPassword = PBKDF2.HashPassword(Encoding.UTF8.GetBytes("Test123"), salt, 100000);
+            var hashedPassword = PBKDF2.HashPassword(Encoding.UTF8.GetBytes(p), salt, 50000);
+
+            Console.WriteLine("Hashed Password is {0}", Convert.ToBase64String(hashedPassword));
+        }
+
+        static void Test2() {
+            //byte[] bytes;
+            //using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256)) {
+            //    bytes = deriveBytes.GetBytes(PBKDF2SubkeyLength);
+            //}
+
+            var salt = PBKDF2.GenerateSalt();
+            //var salt = Encoding.ASCII.GetBytes("9QBqhZg8tzzolzqc0ydQhRhjG+JDqaXBVSqittmX/Og=");
+            //var salt = Encoding.ASCII.GetBytes(s);
+
+            string saltString = Convert.ToBase64String(salt);
+            Console.WriteLine(1);
+            Console.WriteLine(saltString);
+
+            byte[] saltTemp = Encoding.ASCII.GetBytes(saltString);
+
+            //Console.WriteLine();
+
+            saltString = Convert.ToBase64String(saltTemp);
+            Console.WriteLine(2);
+            Console.WriteLine(saltString);
+
+            saltTemp = Encoding.ASCII.GetBytes(saltString);
+
+            //Console.WriteLine();
+
+            saltString = Convert.ToBase64String(saltTemp);
+            Console.WriteLine(3);
+            Console.WriteLine(saltString);
+
+
+
+            var hashedPassword = PBKDF2.HashPassword(Encoding.UTF8.GetBytes("hello123"), salt, 50000);
 
             Console.WriteLine("Hashed Password is {0}", Convert.ToBase64String(hashedPassword));
         }

@@ -14,6 +14,12 @@ namespace ElectionVote.Services.Models {
         [JsonProperty("email")]
         public String Email { get; set; }
 
+        [JsonProperty("salt")]
+        public String Salt { get; set; }
+
+        [JsonProperty("hashedPassword")]
+        public String HashedPassword { get; set; }
+
         [JsonProperty("userId")]
         public String UserId { get; set; }
 

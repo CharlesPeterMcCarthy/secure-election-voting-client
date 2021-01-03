@@ -17,6 +17,8 @@ namespace ElectionVote.Services.Actions {
                 FirstName = firstName,
                 LastName = lastName,
                 Email = email,
+                Salt = salt,
+                HashedPassword = hashedPassword,
                 UserType = userType.ToString()
             };
 
@@ -33,11 +35,9 @@ namespace ElectionVote.Services.Actions {
             }
         }
 
-        public static async Task<User> Login(String email) {
+        public static async Task<User> GetUser(String email) {
             try {
                 String response = await HttpRequest.Get(API.BASE_URL + "/user/by-email/" + email);
-
-                Console.WriteLine(response);
 
                 GetUserResponseDto repsonseObj = JsonConvert.DeserializeObject<GetUserResponseDto>(response);
 
