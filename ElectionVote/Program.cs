@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using ElectionVote.Services;
 using ElectionVote.Services.Enums;
+using ElectionVote.Services.Exceptions;
 using ElectionVote.Services.Interactions;
 using ElectionVote.Services.Interactions.Options;
 using ElectionVote.Services.Models;
@@ -26,7 +27,16 @@ namespace ElectionVote {
 
             Console.Clear();
             Console.WriteLine($"Hi {user.FirstName}!");
-            await OptionsFlow.InteractAsync();
+
+            try {
+                await OptionsFlow.InteractAsync();
+            } catch (LogoutException e) {
+                if (e.IsUserInvoked) Console.WriteLine("You have successfully logged out!");
+                else Console.WriteLine("You have been forcefully logged out: {0}", e.Message);
+                CurrentUser.UnsetCurrentUser(); // Clear user data
+            } catch (Exception e) {
+                Console.WriteLine("An nunknown exception occurred: {0}", e);
+            }
 
             Console.Read();
 

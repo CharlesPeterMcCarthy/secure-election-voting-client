@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ElectionVote.Services.Exceptions;
 using ElectionVote.Services.Models;
 
 namespace ElectionVote.Services.Interactions.Options {
@@ -27,10 +28,10 @@ namespace ElectionVote.Services.Interactions.Options {
                 Name = "Candidates",
                 Action = CandidateOptionsFlow.Interact
             },
-            //new NavigationOption() {
-            //    Name = "Logout",
-            //    Action = LogoutFlow.Interact
-            //}
+            new NavigationOption() {
+                Name = "Logout",
+                Action = null
+            }
         };
 
         public static async Task InteractAsync() {
@@ -56,8 +57,13 @@ namespace ElectionVote.Services.Interactions.Options {
 
             Console.Clear();
 
-            await userFilteredOptions[selectedNavOption - 1].Action();
-            //Console.WriteLine("AFTER");
+            NavigationOption option = userFilteredOptions[selectedNavOption - 1];
+
+            if (option.Action == null) throw new LogoutException("User Invoked Logout", true);
+
+            await option.Action();
+
+            //await userFilteredOptions[selectedNavOption - 1].Action();
         }
 
     }

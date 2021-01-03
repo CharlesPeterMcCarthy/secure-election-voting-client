@@ -95,6 +95,7 @@
     <Compile Include="Services\DTO\Response\GetElectionResultsReponseDto.cs" />
     <Compile Include="Services\Models\NavigationOption.cs" />
     <Compile Include="Services\Interactions\LogoutFlow.cs" />
+    <Compile Include="Services\Exceptions\LogoutException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -114,6 +115,7 @@
     <Folder Include="Services\Interactions\Tasks\Candidates\" />
     <Folder Include="Services\Interactions\Tasks\Registrations\" />
     <Folder Include="Services\Interactions\Tasks\Votes\" />
+    <Folder Include="Services\Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
