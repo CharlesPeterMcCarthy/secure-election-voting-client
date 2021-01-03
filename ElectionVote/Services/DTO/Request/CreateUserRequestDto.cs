@@ -13,6 +13,12 @@ namespace ElectionVote.Services.DTO.Request {
         [JsonProperty("email")]
         public String Email { get; set; }
 
+        [JsonProperty("salt")]
+        public String Salt { get; set; }
+
+        [JsonProperty("hashedPassword")]
+        public String HashedPassword { get; set; }
+
         [JsonProperty("userType")]
         public String UserType { get; set; }
 

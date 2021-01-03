@@ -3,6 +3,7 @@ using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
 using ElectionVote.Services;
+using ElectionVote.Services.Cryptography;
 using ElectionVote.Services.Enums;
 using ElectionVote.Services.Exceptions;
 using ElectionVote.Services.Interactions;
@@ -14,15 +15,15 @@ namespace ElectionVote {
         public static async System.Threading.Tasks.Task Main(string[] args) {
             Console.WriteLine("Welcome to the Election Voting App!\n");
 
-            //User user = await AuthFlow.Interact();
+            User user = await AuthOptionsFlow.Interact();
 
-            User user = new User() {
-                FirstName = "Charles",
-                LastName = "McCarthy",
-                Email = "charles@test.com",
-                UserType = UserType.ADMIN,
-                UserId = "3836cd98-fb85-4140-8493-e1e997d58309"
-            };
+            //User user = new User() {
+            //    FirstName = "Charles",
+            //    LastName = "McCarthy",
+            //    Email = "charles@test.com",
+            //    UserType = UserType.VOTER,
+            //    UserId = "3836cd98-fb85-4140-8493-e1e997d58309"
+            //};
             CurrentUser.SetCurrentUser(user);
 
             Console.Clear();
@@ -42,6 +43,38 @@ namespace ElectionVote {
 
             //Encrypt();
             //HMAC();
+            //string salt = Console.ReadLine();
+            //Test(salt);
+        }
+
+        static void Test(string s) {
+            //byte[] bytes;
+            //using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256)) {
+            //    bytes = deriveBytes.GetBytes(PBKDF2SubkeyLength);
+            //}
+
+            //var salt = PBKDF2.GenerateSalt();
+            var salt = Encoding.ASCII.GetBytes(s);
+            //Console.WriteLine(Convert.ToBase64String(salt));
+
+            var hashedPassword = PBKDF2.HashPassword(Encoding.UTF8.GetBytes("Test123"), salt, 100000);
+
+            Console.WriteLine("Hashed Password is {0}", Convert.ToBase64String(hashedPassword));
+        }
+
+        static void Generate() {
+            //Generate a public/private key pair.  
+            RSA rsa = RSA.Create();
+
+            Console.WriteLine(rsa);
+            //Save the public key information to an RSAParameters structure.  
+            RSAParameters rsaKeyInfo = rsa.ExportParameters(true);
+
+            Console.WriteLine("P (Decimal Encoding): " + toDecimalEncodedStringValue(rsaKeyInfo.P));
+            Console.WriteLine("Q (Decimal Encoding): " + toDecimalEncodedStringValue(rsaKeyInfo.Q));
+            Console.WriteLine("D (Decimal Encoding): " + toDecimalEncodedStringValue(rsaKeyInfo.D));
+            Console.WriteLine("E (Decimal Encoding): " + toDecimalEncodedStringValue(rsaKeyInfo.Exponent));//Value For E In RSA Key Pair Generated.
+            Console.WriteLine("N (Decimal Encoding): " + toDecimalEncodedStringValue(rsaKeyInfo.Modulus));//Value For N In RSA Key Pair Generated.
         }
 
         static void Encrypt() {
@@ -60,14 +93,14 @@ namespace ElectionVote {
             /*Note That The Paragraph Of Code Below Is For Output Purposes Only*/
 
             RSAParameters key_parameters = rsa.ExportParameters(true);//RSA - Note That The Boolean Value Inputted Specifies Whether Or Not Private Key Values Are Included In The RSAParmaters Object Generated, i.e. P, Q, Phi and D.
-            Console.WriteLine("RSA Key Pair Values:");
+            //Console.WriteLine("RSA Key Pair Values:");
             /*Note That The toDecimalEncodedStringValue() Method Is Defined Below At The End Of This Class.*/
-            Console.WriteLine("P (Decimal Encoding): " + toDecimalEncodedStringValue(key_parameters.P));
-            Console.WriteLine("Q (Decimal Encoding): " + toDecimalEncodedStringValue(key_parameters.Q));
-            Console.WriteLine("E (Decimal Encoding): " + toDecimalEncodedStringValue(key_parameters.Exponent));//Value For E In RSA Key Pair Generated.
-            Console.WriteLine("D (Decimal Encoding): " + toDecimalEncodedStringValue(key_parameters.D));
-            Console.WriteLine("N (Decimal Encoding): " + toDecimalEncodedStringValue(key_parameters.Modulus));//Value For N In RSA Key Pair Generated.
-            Console.WriteLine("");
+            //Console.WriteLine("P (Decimal Encoding): " + toDecimalEncodedStringValue(key_parameters.P));
+            //Console.WriteLine("Q (Decimal Encoding): " + toDecimalEncodedStringValue(key_parameters.Q));
+            //Console.WriteLine("E (Decimal Encoding): " + toDecimalEncodedStringValue(key_parameters.Exponent));//Value For E In RSA Key Pair Generated.
+            //Console.WriteLine("D (Decimal Encoding): " + toDecimalEncodedStringValue(key_parameters.D));
+            //Console.WriteLine("N (Decimal Encoding): " + toDecimalEncodedStringValue(key_parameters.Modulus));//Value For N In RSA Key Pair Generated.
+            //Console.WriteLine("");
 
             //Perform Encryption
 
@@ -77,6 +110,8 @@ namespace ElectionVote {
             Console.WriteLine("");
 
             //Perform Decryption
+
+            Console.WriteLine(rsa.ExportParameters(true));
 
             plaintext_data = rsa.Decrypt(ciphertext_data, true);//Perform RSA Decryption - The Boolean Value Inputted Indicates Whether Or Not OAEP Padding Is Utilised (Recommended).
             Console.WriteLine("Plaintext (ASCII Encoded Byte Array): [{0}]", string.Join(", ", plaintext_data));

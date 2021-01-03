@@ -46,7 +46,6 @@
     <Compile Include="Services\DTO\Request\CreateUserRequestDto.cs" />
     <Compile Include="Services\DTO\Request\IRequest.cs" />
     <Compile Include="Services\DTO\Response\GetUserResponseDto.cs" />
-    <Compile Include="Services\Interactions\AuthFlow.cs" />
     <Compile Include="Services\Interactions\Options\OptionsFlow.cs" />
     <Compile Include="Services\Interactions\Options\RegistrationOptionsFlow.cs" />
     <Compile Include="Services\DTO\Response\GetElectionsResponseDto.cs" />
@@ -96,6 +95,12 @@
     <Compile Include="Services\Models\NavigationOption.cs" />
     <Compile Include="Services\Interactions\LogoutFlow.cs" />
     <Compile Include="Services\Exceptions\LogoutException.cs" />
+    <Compile Include="Services\Cryptography\PBKDF2.cs" />
+    <Compile Include="Services\Interactions\Options\AuthOptionsFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\Authentication\LoginFlow.cs" />
+    <Compile Include="Services\Interactions\Tasks\Authentication\SignUpFlow.cs" />
+    <Compile Include="Services\Models\AuthenticationOption.cs" />
+    <Compile Include="Services\Models\OptionType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -116,6 +121,8 @@
     <Folder Include="Services\Interactions\Tasks\Registrations\" />
     <Folder Include="Services\Interactions\Tasks\Votes\" />
     <Folder Include="Services\Exceptions\" />
+    <Folder Include="Services\Cryptography\" />
+    <Folder Include="Services\Interactions\Tasks\Authentication\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

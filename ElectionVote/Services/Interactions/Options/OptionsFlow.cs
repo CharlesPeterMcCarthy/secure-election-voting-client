@@ -62,8 +62,6 @@ namespace ElectionVote.Services.Interactions.Options {
             if (option.Action == null) throw new LogoutException("User Invoked Logout", true);
 
             await option.Action();
-
-            //await userFilteredOptions[selectedNavOption - 1].Action();
         }
 
     }

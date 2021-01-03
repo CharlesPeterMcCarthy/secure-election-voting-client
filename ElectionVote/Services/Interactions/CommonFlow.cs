@@ -91,6 +91,15 @@ namespace ElectionVote.Services.Interactions {
             });
         }
 
+        public static void PrintAuthtenticationOptions(List<AuthenticationOption> authOptions) {
+            int index = 0;
+
+            authOptions.ForEach(option => {
+                index++;
+                Console.WriteLine($"{index}) {option.Name}");
+            });
+        }
+
         public static List<NavigationOption> FilterNavigationOptions(List<NavigationOption> navigationOptions) {
             if (CurrentUser.IsAdmin) return navigationOptions.FindAll(option => option.IsAccessibleToAll || option.IsAdminOnly);
             return navigationOptions.FindAll(option => option.IsAccessibleToAll || option.IsVoterOnly);

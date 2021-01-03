@@ -12,7 +12,7 @@ namespace ElectionVote.Services.Actions {
 
     public static class Auth {
 
-        public static async Task<User> SignUp(String firstName, String lastName, String email, UserType userType) {
+        public static async Task<User> SignUp(String firstName, String lastName, String email, String salt, String hashedPassword, UserType userType) {
             CreateUserRequestDto dto = new CreateUserRequestDto() {
                 FirstName = firstName,
                 LastName = lastName,
@@ -42,7 +42,7 @@ namespace ElectionVote.Services.Actions {
                 GetUserResponseDto repsonseObj = JsonConvert.DeserializeObject<GetUserResponseDto>(response);
 
                 if (!repsonseObj.Success) throw new Exception("Failed to create user");
-                else Console.WriteLine("Unable to find user / login");
+                //else Console.WriteLine("Unable to find user / login");
 
                 return repsonseObj.User;
             } catch (Exception e) {
