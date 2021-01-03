@@ -26,7 +26,11 @@ namespace ElectionVote.Services.Interactions.Options {
             new NavigationOption() {
                 Name = "Candidates",
                 Action = CandidateOptionsFlow.Interact
-            }
+            },
+            //new NavigationOption() {
+            //    Name = "Logout",
+            //    Action = LogoutFlow.Interact
+            //}
         };
 
         public static async Task InteractAsync() {
@@ -53,6 +57,7 @@ namespace ElectionVote.Services.Interactions.Options {
             Console.Clear();
 
             await userFilteredOptions[selectedNavOption - 1].Action();
+            //Console.WriteLine("AFTER");
         }
 
     }

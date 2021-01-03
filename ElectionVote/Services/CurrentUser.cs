@@ -23,5 +23,13 @@ namespace ElectionVote.Services {
             IsAdmin = user.UserType == UserType.ADMIN;
         }
 
+        public static void UnsetCurrentUser() {
+            UserID = null;
+            FirstName = null;
+            LastName = null;
+            UserType = UserType.VOTER;
+            IsAdmin = false;
+        }
+
     }
 }

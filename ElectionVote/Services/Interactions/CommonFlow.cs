@@ -18,7 +18,8 @@ namespace ElectionVote.Services.Interactions {
             elections.ForEach(e => {
                 i++;
                 Console.Write($"{i}: {e.ElectionName}");
-                if (e.ElectionFinished) Console.Write(" (Finished)");
+                if (!e.ElectionStarted && !e.ElectionFinished) Console.Write(" (New)");
+                else if (e.ElectionFinished) Console.Write(" (Finished)");
                 else if (e.ElectionStarted) Console.Write(" (Ongoing)");
                 Console.WriteLine();
             });

@@ -32,6 +32,7 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Services\Interactions\Tasks\Elections\ViewElectionResultsFlow.cs" />
     <Compile Include="Services\DTO\Response\GetElectionResultsReponseDto.cs" />
     <Compile Include="Services\Models\NavigationOption.cs" />
+    <Compile Include="Services\Interactions\LogoutFlow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
