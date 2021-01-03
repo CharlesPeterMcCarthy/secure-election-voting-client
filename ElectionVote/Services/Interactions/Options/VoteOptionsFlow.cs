@@ -13,6 +13,10 @@ namespace ElectionVote.Services.Interactions.Options {
                 Action = SubmitVoteFlow.Interact,
                 IsAccessibleToAll = false,
                 IsVoterOnly = true
+            },
+            new NavigationOption() {
+                Name = "-- Cancel --",
+                Action = null
             }
         };
 
@@ -36,7 +40,11 @@ namespace ElectionVote.Services.Interactions.Options {
 
             Console.Clear();
 
-            await NavigationOptions[selectedNavOption - 1].Action();
+            NavigationOption option = NavigationOptions[selectedNavOption - 1];
+
+            if (option.Action == null) return;
+
+            await option.Action();
         }
 
     }

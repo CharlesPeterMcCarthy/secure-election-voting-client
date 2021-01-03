@@ -54,6 +54,10 @@ namespace ElectionVote.Services.Interactions.Options {
                 IsAccessibleToAll = false,
                 IsAdminOnly = true
             },
+            new NavigationOption() {
+                Name = "-- Cancel --",
+                Action = null
+            }
         };
 
         public static async Task Interact() {
@@ -77,7 +81,11 @@ namespace ElectionVote.Services.Interactions.Options {
 
             Console.Clear();
 
-            await userFilteredOptions[selectedNavOption - 1].Action();
+            NavigationOption option = userFilteredOptions[selectedNavOption - 1];
+
+            if (option.Action == null) return;
+
+            await option.Action();
         }
 
     }

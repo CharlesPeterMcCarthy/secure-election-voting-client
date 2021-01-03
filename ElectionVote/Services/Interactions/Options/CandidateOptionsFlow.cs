@@ -29,6 +29,10 @@ namespace ElectionVote.Services.Interactions.Options {
                 Action = DeleteCandidateFlow.Interact,
                 IsAccessibleToAll = false,
                 IsAdminOnly = true
+            },
+            new NavigationOption() {
+                Name = "-- Cancel --",
+                Action = null
             }
         };
 
@@ -53,7 +57,12 @@ namespace ElectionVote.Services.Interactions.Options {
 
             Console.Clear();
 
-            await userFilteredOptions[selectedNavOption - 1].Action();
+
+            NavigationOption option = userFilteredOptions[selectedNavOption - 1];
+
+            if (option.Action == null) return;
+
+            await option.Action();
         }
 
     }
