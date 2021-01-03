@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace ElectionVote.Services.Models {
 
-    public class NavigationOption {
+    public class NavigationOption : OptionType {
 
         public String Name { get; set; }
 
