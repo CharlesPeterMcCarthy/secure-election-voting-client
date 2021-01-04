@@ -102,6 +102,7 @@
     <Compile Include="Services\Models\AuthenticationOption.cs" />
     <Compile Include="Services\Models\OptionType.cs" />
     <Compile Include="Services\Interactions\Tasks\Votes\ViewVoteFlow.cs" />
+    <Compile Include="Services\StateListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

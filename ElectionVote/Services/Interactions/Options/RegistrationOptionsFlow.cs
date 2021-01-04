@@ -46,6 +46,8 @@ namespace ElectionVote.Services.Interactions.Options {
 
             Console.Clear();
 
+            StateListener.PerformAction();
+
             NavigationOption option = NavigationOptions[selectedNavOption - 1];
 
             if (option.Action == null) return;

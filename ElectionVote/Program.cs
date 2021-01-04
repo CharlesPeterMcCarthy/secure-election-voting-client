@@ -2,6 +2,7 @@
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using ElectionVote.Services;
 using ElectionVote.Services.Cryptography;
 using ElectionVote.Services.Enums;
@@ -25,6 +26,7 @@ namespace ElectionVote {
                 UserId = "3836cd98-fb85-4140-8493-e1e997d58309"
             };
             CurrentUser.SetCurrentUser(user);
+
 
             //Console.Clear();
             Console.WriteLine($"Hi {user.FirstName}!");

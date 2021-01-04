@@ -57,6 +57,8 @@ namespace ElectionVote.Services.Interactions.Options {
 
             Console.Clear();
 
+            StateListener.PerformAction();
+
             NavigationOption option = userFilteredOptions[selectedNavOption - 1];
 
             if (option.Action == null) throw new LogoutException("User Invoked Logout", true);
