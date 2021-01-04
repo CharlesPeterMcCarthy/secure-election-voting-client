@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElectionVote.Services.Actions;
+using ElectionVote.Services.Exceptions;
 using ElectionVote.Services.Models.Core;
 
 namespace ElectionVote.Services.Interactions.Tasks.Candidates {
@@ -24,10 +25,14 @@ namespace ElectionVote.Services.Interactions.Tasks.Candidates {
                 } else {
                     Console.WriteLine("There are no elections to view candidates from.");
                 }
+            } catch (ConsecutiveActionsException e) {
+                throw e;
             } catch (Exception e) {
                 Console.WriteLine(e);
                 Console.WriteLine("Unable to get elections");
             }
+
+            StateListener.PerformAction();
 
             CommonFlow.EndFlowPrompt();
         }

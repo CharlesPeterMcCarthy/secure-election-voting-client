@@ -11,6 +11,8 @@ namespace ElectionVote.Services.Actions {
     public static class CandidateActions {
 
         public static async Task<bool> CreateCandidate(Candidate candidate) {
+            StateListener.EndpointCall();
+
             CreateCandidateRequestDto dto = new CreateCandidateRequestDto() {
                 ElectionId = candidate.ElectionId,
                 FirstName = candidate.FirstName,
@@ -33,6 +35,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<bool> DeleteCandidate(Candidate candidate) {
+            StateListener.EndpointCall();
+
             try {
                 String response = await HttpRequest.Delete($"{API.BASE_URL}/candidate/{candidate.CandidateId}/{candidate.ElectionId}");
 
@@ -48,6 +52,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<Candidate> UpdateCandidate(Candidate candidate) {
+            StateListener.EndpointCall();
+
             UpdateCandidateRequestDto dto = new UpdateCandidateRequestDto() {
                 Candidate = candidate
             };

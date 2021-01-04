@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElectionVote.Services.Actions;
+using ElectionVote.Services.Exceptions;
 using ElectionVote.Services.Models.Core;
 
 namespace ElectionVote.Services.Interactions.Tasks.Votes {
@@ -25,10 +26,14 @@ namespace ElectionVote.Services.Interactions.Tasks.Votes {
                 } else {
                     Console.WriteLine("There are no elections to vote in right now.");
                 }
+            } catch (ConsecutiveActionsException e) {
+                throw e;
             } catch (Exception e) {
                 Console.WriteLine(e);
                 Console.WriteLine("Unable to get elections");
             }
+
+            StateListener.PerformAction();
 
             CommonFlow.EndFlowPrompt();
         }
@@ -42,6 +47,7 @@ namespace ElectionVote.Services.Interactions.Tasks.Votes {
             Candidate candidate = CommonFlow.GetSelectedCandidate(election.Candidates);
 
             bool voted = await BallotPaperActions.SubmitBallotPaperVote(ballotPaper, candidate);
+            StateListener.PerformAction();
 
             if (voted) Console.WriteLine($"You have successfully submitted your vote for {candidate.FirstName} {candidate.LastName}!");
             else Console.WriteLine($"Unable to submit your vote for {candidate.FirstName} {candidate.LastName}.");

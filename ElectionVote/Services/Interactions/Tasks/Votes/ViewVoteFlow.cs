@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElectionVote.Services.Actions;
+using ElectionVote.Services.Exceptions;
 using ElectionVote.Services.Models.Core;
 
 namespace ElectionVote.Services.Interactions.Tasks.Votes {
@@ -24,16 +25,21 @@ namespace ElectionVote.Services.Interactions.Tasks.Votes {
                 } else {
                     Console.WriteLine("You have not voted in any elections yet.");
                 }
+            } catch (ConsecutiveActionsException e) {
+                throw e;
             } catch (Exception e) {
                 Console.WriteLine(e);
                 Console.WriteLine("Unable to get elections");
             }
+
+            StateListener.PerformAction();
 
             CommonFlow.EndFlowPrompt();
         }
 
         public static async Task DisplayVote(Election election) {
             BallotPaper ballotPaper = await BallotPaperActions.GetElectionBallotPaper(election.ElectionId);
+            StateListener.PerformAction();
 
             Console.WriteLine($"Here is how you voted for the {election.ElectionName}:");
             Console.WriteLine($"You voted for {ballotPaper.Vote.FirstName} {ballotPaper.Vote.LastName}!");

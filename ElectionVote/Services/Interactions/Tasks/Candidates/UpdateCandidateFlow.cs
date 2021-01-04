@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElectionVote.Services.Actions;
+using ElectionVote.Services.Exceptions;
 using ElectionVote.Services.Models.Core;
 
 namespace ElectionVote.Services.Interactions.Tasks.Candidates {
@@ -37,10 +38,14 @@ namespace ElectionVote.Services.Interactions.Tasks.Candidates {
                 } else {
                     Console.WriteLine("There are no upcoming elections to choose a candidate to update from.");
                 }
+            } catch (ConsecutiveActionsException e) {
+                throw e;
             } catch (Exception e) {
                 Console.WriteLine(e);
                 Console.WriteLine("Unable to update candidate");
             }
+
+            StateListener.PerformAction();
 
             CommonFlow.EndFlowPrompt();
         }
@@ -49,10 +54,15 @@ namespace ElectionVote.Services.Interactions.Tasks.Candidates {
             Console.WriteLine("For the following inputs, hit Enter to keep the current value. Or type in a new value to update.");
             Console.Write($"Candidate First Name: ({candidate.FirstName}): ");
             String updatedFirstName = Console.ReadLine();
+            StateListener.PerformAction();
+
             Console.Write($"Candidate Last Name: ({candidate.LastName}): ");
             String updatedLasttName = Console.ReadLine();
+            StateListener.PerformAction();
+
             Console.Write($"Candidate Party: ({candidate.Party}): ");
             String updatedParty = Console.ReadLine();
+            StateListener.PerformAction();
 
             if (updatedFirstName != "") candidate.FirstName = updatedFirstName;
             if (updatedLasttName != "") candidate.LastName = updatedLasttName;

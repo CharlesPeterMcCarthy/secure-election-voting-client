@@ -13,6 +13,8 @@ namespace ElectionVote.Services.Actions {
     public static class Auth {
 
         public static async Task<User> SignUp(String firstName, String lastName, String email, String salt, String hashedPassword, UserType userType) {
+            StateListener.EndpointCall();
+
             CreateUserRequestDto dto = new CreateUserRequestDto() {
                 FirstName = firstName,
                 LastName = lastName,
@@ -36,6 +38,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<User> GetUser(String email) {
+            StateListener.EndpointCall();
+
             try {
                 String response = await HttpRequest.Get(API.BASE_URL + "/user/by-email/" + email);
 

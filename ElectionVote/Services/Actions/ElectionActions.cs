@@ -11,6 +11,8 @@ namespace ElectionVote.Services.Actions {
     public static class ElectionActions {
 
         public static async Task<List<Election>> GetAllElections() {
+            StateListener.EndpointCall();
+
             try {
                 String response = await HttpRequest.Get($"{API.BASE_URL}/election/all");
                 GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
@@ -25,6 +27,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<List<Election>> GetUpcomingElections() {
+            StateListener.EndpointCall();
+
             try {
                 String response = await HttpRequest.Get($"{API.BASE_URL}/election/upcoming");
                 GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
@@ -39,6 +43,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<List<Election>> GetFinishedElections() {
+            StateListener.EndpointCall();
+
             try {
                 String response = await HttpRequest.Get($"{API.BASE_URL}/election/finished");
                 GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
@@ -53,6 +59,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<List<Election>> GetCurrentElections() {
+            StateListener.EndpointCall();
+
             try {
                 String response = await HttpRequest.Get($"{API.BASE_URL}/election/current");
                 GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
@@ -67,6 +75,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<List<Election>> GetCurrentNonVotedElections() {
+            StateListener.EndpointCall();
+
             try {
                 String response = await HttpRequest.Get($"{API.BASE_URL}/election/non-voted/{CurrentUser.UserID}");
                 GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
@@ -81,6 +91,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<List<Election>> GetVotedElections() {
+            StateListener.EndpointCall();
+
             try {
                 String response = await HttpRequest.Get($"{API.BASE_URL}/election/voted/{CurrentUser.UserID}");
                 GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
@@ -95,6 +107,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<List<Election>> GetUserUnregisteredElections() {
+            StateListener.EndpointCall();
+
             try {
                 String response = await HttpRequest.Get($"{API.BASE_URL}/election/unregistered/{CurrentUser.UserID}/false"); // All elections
                 GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
@@ -109,6 +123,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<List<Election>> GetUserRegisteredElections() {
+            StateListener.EndpointCall();
+
             try {
                 String response = await HttpRequest.Get($"{API.BASE_URL}/election/registered/{CurrentUser.UserID}/true"); // Upcoming elections only
                 GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
@@ -123,6 +139,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<Election> CreateElection(Election election) {
+            StateListener.EndpointCall();
+
             CreateElectionRequestDto dto = new CreateElectionRequestDto() {
                 UserId = CurrentUser.UserID,
                 ElectionName = election.ElectionName
@@ -142,6 +160,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<bool> StartElection(String electionId) {
+            StateListener.EndpointCall();
+
             try {
                 String response = await HttpRequest.Put($"{API.BASE_URL}/election/start/{electionId}", null);
                 ElectionResponseDto repsonseObj = JsonConvert.DeserializeObject<ElectionResponseDto>(response);
@@ -156,6 +176,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<bool> EndElection(String electionId) {
+            StateListener.EndpointCall();
+
             try {
                 String response = await HttpRequest.Put($"{API.BASE_URL}/election/finish/{electionId}", null);
                 ElectionResponseDto repsonseObj = JsonConvert.DeserializeObject<ElectionResponseDto>(response);
@@ -170,6 +192,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<Election> UpdateElection(Election election) {
+            StateListener.EndpointCall();
+
             UpdateElectionRequestDto dto = new UpdateElectionRequestDto() {
                 Election = election
             };
@@ -188,6 +212,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<bool> DeleteElection(String electionId) {
+            StateListener.EndpointCall();
+
             try {
                 String response = await HttpRequest.Delete($"{API.BASE_URL}/election/{electionId}");
                 ElectionResponseDto repsonseObj = JsonConvert.DeserializeObject<ElectionResponseDto>(response);
@@ -202,6 +228,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<GetElectionResultsReponseDto> GetElectionResults(String electionId) {
+            StateListener.EndpointCall();
+
             try {
                 String response = await HttpRequest.Get($"{API.BASE_URL}/election/results/{electionId}");
                 GetElectionResultsReponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionResultsReponseDto>(response);

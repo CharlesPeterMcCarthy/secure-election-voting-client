@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElectionVote.Services.Actions;
+using ElectionVote.Services.Exceptions;
 using ElectionVote.Services.Models.Core;
 
 namespace ElectionVote.Services.Interactions.Tasks.Registrations {
@@ -20,10 +21,14 @@ namespace ElectionVote.Services.Interactions.Tasks.Registrations {
                 } else {
                     Console.WriteLine("There are no elections to register for.");
                 }
+            } catch (ConsecutiveActionsException e) {
+                throw e;
             } catch (Exception e) {
                 Console.WriteLine(e);
                 Console.WriteLine("Unable to get elections");
             }
+
+            StateListener.PerformAction();
 
             CommonFlow.EndFlowPrompt();
         }
@@ -41,6 +46,7 @@ namespace ElectionVote.Services.Interactions.Tasks.Registrations {
 
                 try {
                     electionVal = int.Parse(Console.ReadLine());
+                    StateListener.PerformAction();
                 } catch (FormatException) {
                     CommonFlow.InvalidValueWarning();
                     continue;

@@ -17,6 +17,8 @@ namespace ElectionVote.Services {
 
         public static DateTime LastActionPerformed { get; set; }
 
+        public static DateTime LastEndpointCalled { get; set; }
+
         public static void SetCurrentUser(User user) {
             UserID = user.UserId;
             FirstName = user.FirstName;
@@ -36,6 +38,10 @@ namespace ElectionVote.Services {
 
         public static void ActionPerformed() {
             LastActionPerformed = DateTime.Now;
+        }
+
+        public static void EndpointCalled() {
+            LastEndpointCalled = DateTime.Now;
         }
 
     }

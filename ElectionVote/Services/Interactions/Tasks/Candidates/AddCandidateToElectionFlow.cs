@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElectionVote.Services.Actions;
+using ElectionVote.Services.Exceptions;
 using ElectionVote.Services.Models.Core;
 
 namespace ElectionVote.Services.Interactions.Tasks.Candidates {
@@ -26,10 +27,14 @@ namespace ElectionVote.Services.Interactions.Tasks.Candidates {
                 } else {
                     Console.WriteLine("There are no upcoming elections to add a new candidate to.");
                 }
+            } catch (ConsecutiveActionsException e) {
+                throw e;
             } catch (Exception e) {
                 Console.WriteLine(e);
                 Console.WriteLine("Unable to get elections");
             }
+
+            StateListener.PerformAction();
 
             CommonFlow.EndFlowPrompt();
         }
@@ -37,10 +42,15 @@ namespace ElectionVote.Services.Interactions.Tasks.Candidates {
         private static Candidate GetCandidateDetails(Election election) {
             Console.Write("Enter Candidate First Name: ");
             String firstName = Console.ReadLine();
+            StateListener.PerformAction();
+
             Console.Write("Enter Candidate Last Name: ");
             String lastName = Console.ReadLine();
+            StateListener.PerformAction();
+
             Console.Write("Enter Candidate Party: ");
             String party = Console.ReadLine();
+            StateListener.PerformAction();
 
             return new Candidate() {
                 FirstName = firstName,

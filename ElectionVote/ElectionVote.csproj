@@ -103,6 +103,7 @@
     <Compile Include="Services\Models\OptionType.cs" />
     <Compile Include="Services\Interactions\Tasks\Votes\ViewVoteFlow.cs" />
     <Compile Include="Services\StateListener.cs" />
+    <Compile Include="Services\Exceptions\ConsecutiveActionsException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

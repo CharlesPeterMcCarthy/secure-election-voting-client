@@ -11,6 +11,8 @@ namespace ElectionVote.Services.Actions {
     public static class BallotPaperActions {
 
         public static async Task<BallotPaper> GetElectionBallotPaper(String electionId) {
+            StateListener.EndpointCall();
+
             try {
                 String response = await HttpRequest.Get($"{API.BASE_URL}/ballot/voter/{electionId}/{CurrentUser.UserID}");
                 GetBallotPaperResponseDto repsonseObj = JsonConvert.DeserializeObject<GetBallotPaperResponseDto>(response);
@@ -25,6 +27,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<bool> SubmitBallotPaperVote(BallotPaper ballotPaper, Candidate candidate) {
+            StateListener.EndpointCall();
+
             SubmitBallotPaperRequestDto dto = new SubmitBallotPaperRequestDto() {
                 BallotPaper = ballotPaper,
                 Candidate = candidate,

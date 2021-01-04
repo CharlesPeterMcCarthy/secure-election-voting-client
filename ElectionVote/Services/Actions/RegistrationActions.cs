@@ -9,6 +9,8 @@ namespace ElectionVote.Services.Actions {
     public static class RegistrationActions {
 
         public static async Task<bool> RegisterForElection(String userId, String electionId) {
+            StateListener.EndpointCall();
+
             RegisterForElectionRequestDto dto = new RegisterForElectionRequestDto() {
                 UserId = userId,
                 ElectionId = electionId
@@ -29,6 +31,8 @@ namespace ElectionVote.Services.Actions {
         }
 
         public static async Task<bool> RemoveRegistration(String electionId) {
+            StateListener.EndpointCall();
+
             RemoveRegistrationRequestDto dto = new RemoveRegistrationRequestDto() {
                 UserId = CurrentUser.UserID,
                 ElectionId = electionId

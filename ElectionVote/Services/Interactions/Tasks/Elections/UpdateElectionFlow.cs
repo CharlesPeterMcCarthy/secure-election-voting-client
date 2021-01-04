@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElectionVote.Services.Actions;
+using ElectionVote.Services.Exceptions;
 using ElectionVote.Services.Models.Core;
 
 namespace ElectionVote.Services.Interactions.Tasks.Elections {
@@ -26,10 +27,14 @@ namespace ElectionVote.Services.Interactions.Tasks.Elections {
                 } else {
                     Console.WriteLine("There are no elections to update.");
                 }
+            } catch (ConsecutiveActionsException e) {
+                throw e;
             } catch (Exception e) {
                 Console.WriteLine(e);
                 Console.WriteLine("Unable to update election");
             }
+
+            StateListener.PerformAction();
 
             CommonFlow.EndFlowPrompt();
         }
@@ -38,6 +43,7 @@ namespace ElectionVote.Services.Interactions.Tasks.Elections {
             Console.WriteLine("For the following inputs, hit Enter to keep the current value. Or type in a new value to update.");
             Console.Write($"Election Name: ({election.ElectionName}): ");
             String electionName = Console.ReadLine();
+            StateListener.PerformAction();
 
             if (electionName != "") election.ElectionName = electionName;
 

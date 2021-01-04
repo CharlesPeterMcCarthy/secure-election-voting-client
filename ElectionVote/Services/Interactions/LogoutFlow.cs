@@ -7,7 +7,7 @@ namespace ElectionVote.Services.Interactions {
         public static Task Interact() {
             Console.WriteLine("You have chosen to logout of the Secure Voting Application.");
 
-            //CurrentUser.UnsetCurrentUser();
+            CurrentUser.UnsetCurrentUser();
 
             Console.WriteLine("You have successfully logged out.");
 
