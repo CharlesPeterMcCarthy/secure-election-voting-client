@@ -15,6 +15,12 @@ namespace ElectionVote.Services.Interactions.Options {
                 IsVoterOnly = true
             },
             new NavigationOption() {
+                Name = "View Previous Votes",
+                Action = ViewVoteFlow.Interact,
+                IsAccessibleToAll = false,
+                IsVoterOnly = true
+            },
+            new NavigationOption() {
                 Name = "-- Cancel --",
                 Action = null
             }

@@ -80,6 +80,20 @@ namespace ElectionVote.Services.Actions {
             }
         }
 
+        public static async Task<List<Election>> GetVotedElections() {
+            try {
+                String response = await HttpRequest.Get($"{API.BASE_URL}/election/voted/{CurrentUser.UserID}");
+                GetElectionsResponseDto repsonseObj = JsonConvert.DeserializeObject<GetElectionsResponseDto>(response);
+
+                if (!repsonseObj.Success) throw new Exception("Failed to retrieve voted elections");
+
+                return repsonseObj.Elections;
+            } catch (Exception e) {
+                Console.WriteLine("Unable to retrieve voted elections");
+                return null;
+            }
+        }
+
         public static async Task<List<Election>> GetUserUnregisteredElections() {
             try {
                 String response = await HttpRequest.Get($"{API.BASE_URL}/election/unregistered/{CurrentUser.UserID}/false"); // All elections

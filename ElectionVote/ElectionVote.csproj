@@ -101,6 +101,7 @@
     <Compile Include="Services\Interactions\Tasks\Authentication\SignUpFlow.cs" />
     <Compile Include="Services\Models\AuthenticationOption.cs" />
     <Compile Include="Services\Models\OptionType.cs" />
+    <Compile Include="Services\Interactions\Tasks\Votes\ViewVoteFlow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

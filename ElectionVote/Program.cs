@@ -15,15 +15,15 @@ namespace ElectionVote {
         public static async System.Threading.Tasks.Task Main(string[] args) {
             Console.WriteLine("Welcome to the Election Voting App!\n");
 
-            User user = await AuthOptionsFlow.Interact();
+            //User user = await AuthOptionsFlow.Interact();
 
-            //User user = new User() {
-            //    FirstName = "Charles",
-            //    LastName = "McCarthy",
-            //    Email = "charles@test.com",
-            //    UserType = UserType.VOTER,
-            //    UserId = "3836cd98-fb85-4140-8493-e1e997d58309"
-            //};
+            User user = new User() {
+                FirstName = "Charles",
+                LastName = "McCarthy",
+                Email = "charles@test.com",
+                UserType = UserType.ADMIN,
+                UserId = "3836cd98-fb85-4140-8493-e1e997d58309"
+            };
             CurrentUser.SetCurrentUser(user);
 
             //Console.Clear();
@@ -47,59 +47,205 @@ namespace ElectionVote {
             //string password = Console.ReadLine();
             //Test(salt, password);
             //Test2();
+
+            //RSATest();
+
+            //Keys();
+
+            //ChangeKey("<RSAKeyValue><Modulus>rbolZ6GykSxcrNBtDv38yXla3DVGcdD4a0bqIEG3bP+j9367HsmKV3eqEA3S+uBV403DbJBqbgAJk1DKWbGzHBcWQL3IP05+o7Mh2liEFadf3rzmAXCafwLJ+F68mpIMJPIU/bPjhnsWCE9ixEPXswB8+i/gQXrMonx5SaHxBLWVa6bJJp7a/Cl1vR078skS2rI/n+x4bOCtt1cNtXMW7UtqIyYe++ajF2l0rx3vH64w502Y5lwdxQbTSYPw3cVVrejDfBJeLcy1O9QpYbYs+cig36OBzD7OzjUn3wGDowwu/ucsDuTV2gLwQn70Gfoouvg+FX1pf9desbkuRVWglw==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>");
+
         }
 
-        static void Test(string s, string p) {
-            //byte[] bytes;
-            //using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256)) {
-            //    bytes = deriveBytes.GetBytes(PBKDF2SubkeyLength);
-            //}
+        static void ChangeKey(String key) {
+            var rsa = new RSACryptoServiceProvider();
 
-            //var salt = PBKDF2.GenerateSalt();
-            var salt = Encoding.ASCII.GetBytes(s);
-            //Console.WriteLine(Convert.ToBase64String(salt));
+            Console.WriteLine("Setup");
+            Console.WriteLine("--------------------");
+            rsa.FromXmlString(key);
+            //Console.WriteLine(x);
+            //Console.WriteLine("Private Key");
+            //Console.WriteLine("--------------------");
+            //Console.WriteLine(rsa.ToXmlString(true));
 
-            var hashedPassword = PBKDF2.HashPassword(Encoding.UTF8.GetBytes(p), salt, 50000);
-
-            Console.WriteLine("Hashed Password is {0}", Convert.ToBase64String(hashedPassword));
+            Console.WriteLine("Public Key");
+            Console.WriteLine("--------------------");
+            Console.WriteLine(rsa.ToXmlString(false));
+            //Console.WriteLine("Private Key");
+            //Console.WriteLine("--------------------");
+            //Console.WriteLine(rsa.ToXmlString(true));
         }
 
-        static void Test2() {
-            //byte[] bytes;
-            //using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256)) {
-            //    bytes = deriveBytes.GetBytes(PBKDF2SubkeyLength);
-            //}
+        static void Keys() {
+            RSAParameters publicKey;
+            RSAParameters privateKey;
 
-            var salt = PBKDF2.GenerateSalt();
-            //var salt = Encoding.ASCII.GetBytes("9QBqhZg8tzzolzqc0ydQhRhjG+JDqaXBVSqittmX/Og=");
-            //var salt = Encoding.ASCII.GetBytes(s);
+            using (var rsa = new RSACryptoServiceProvider(2048)) {
+                rsa.PersistKeyInCsp = false;
+                publicKey = rsa.ExportParameters(false);
+                privateKey = rsa.ExportParameters(true);
 
-            string saltString = Convert.ToBase64String(salt);
-            Console.WriteLine(1);
-            Console.WriteLine(saltString);
+                Console.WriteLine("Public Key");
+                Console.WriteLine("--------------------");
+                Console.WriteLine(rsa.ToXmlString(false));
+                Console.WriteLine("Private Key");
+                Console.WriteLine("--------------------");
+                Console.WriteLine(rsa.ToXmlString(true));
+            }
 
-            byte[] saltTemp = Encoding.ASCII.GetBytes(saltString);
+            Console.WriteLine("-----");
+            //Console.WriteLine(toDecimalEncodedStringValue(publicKey.D));
+            //Console.WriteLine(toDecimalEncodedStringValue(privateKey.D));
 
-            //Console.WriteLine();
-
-            saltString = Convert.ToBase64String(saltTemp);
-            Console.WriteLine(2);
-            Console.WriteLine(saltString);
-
-            saltTemp = Encoding.ASCII.GetBytes(saltString);
-
-            //Console.WriteLine();
-
-            saltString = Convert.ToBase64String(saltTemp);
-            Console.WriteLine(3);
-            Console.WriteLine(saltString);
+            //Console.WriteLine("P (Decimal Encoding): " + (publicKey.P));
+            //Console.WriteLine("Q (Decimal Encoding): " + (publicKey.Q));
+            //Console.WriteLine("D (Decimal Encoding): " + (publicKey.D));
+            //Console.WriteLine("E (Decimal Encoding): " + (publicKey.Exponent));//Value For E In RSA Key Pair Generated.
+            //Console.WriteLine("N (Decimal Encoding): " + (publicKey.Modulus));//Value For N In RSA Key Pair Generated.
 
 
+            //Console.WriteLine("P (Decimal Encoding): " + toDecimalEncodedStringValue(publicKey.P));
+            //Console.WriteLine("Q (Decimal Encoding): " + toDecimalEncodedStringValue(publicKey.Q));
+            ////Console.WriteLine("D (Decimal Encoding): " + toDecimalEncodedStringValue(publicKey.D));
+            //Console.WriteLine("E (Decimal Encoding): " + toDecimalEncodedStringValue(publicKey.Exponent));//Value For E In RSA Key Pair Generated.
+            //Console.WriteLine("N (Decimal Encoding): " + toDecimalEncodedStringValue(publicKey.Modulus));//Value For N In RSA Key Pair Generated.
 
-            var hashedPassword = PBKDF2.HashPassword(Encoding.UTF8.GetBytes("hello123"), salt, 50000);
+            Console.WriteLine("-----");
 
-            Console.WriteLine("Hashed Password is {0}", Convert.ToBase64String(hashedPassword));
+            //Console.WriteLine("P (Decimal Encoding): " + (privateKey.P));
+            //Console.WriteLine("Q (Decimal Encoding): " + (privateKey.Q));
+            //Console.WriteLine("D (Decimal Encoding): " + (privateKey.D));
+            //Console.WriteLine("E (Decimal Encoding): " + (privateKey.Exponent));//Value For E In RSA Key Pair Generated.
+            //Console.WriteLine("N (Decimal Encoding): " + (privateKey.Modulus));//Value For N In RSA Key Pair Generated.
+
+            //Console.WriteLine("P (Decimal Encoding): " + toDecimalEncodedStringValue(privateKey.P));
+            //Console.WriteLine("Q (Decimal Encoding): " + toDecimalEncodedStringValue(privateKey.Q));
+            //Console.WriteLine("D (Decimal Encoding): " + toDecimalEncodedStringValue(privateKey.D));
+            //Console.WriteLine("E (Decimal Encoding): " + toDecimalEncodedStringValue(privateKey.Exponent));//Value For E In RSA Key Pair Generated.
+            //Console.WriteLine("N (Decimal Encoding): " + toDecimalEncodedStringValue(privateKey.Modulus));//Value For N In RSA Key Pair Generated.
+
         }
+
+        static void RSATest() {
+
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();//RSA Object Used To Create And Verify Digital Signatures
+
+            //Data To Be Signed
+
+            string text = "Hello World";
+            byte[] data = Encoding.ASCII.GetBytes(text);
+            Console.WriteLine("Data (ASCII Encoded Text): " + text);
+            Console.WriteLine("Data (ASCII Encoded Byte Array): [{0}]", string.Join(", ", data));
+            Console.WriteLine("");
+
+            //Calculate Hash Value
+
+            HashAlgorithm hash_alg_object = SHA256.Create();//Create Instance Of SHA256 Hash Algorithm
+            byte[] hash_value = hash_alg_object.ComputeHash(data);//Calculate Hash Value
+            String hex_encoded_hash_value = BitConverter.ToString(hash_value);
+            Console.WriteLine("Hash Value (SHA256 Byte Array): [{0}]", string.Join(", ", hash_value));
+            Console.WriteLine("Hash Value (SHA256 Hexadecimal Encoded String): " + hex_encoded_hash_value);
+            Console.WriteLine("Hash String: " + Convert.ToBase64String(hash_value));
+            Console.WriteLine("");
+
+            //Calculate Digital Signature
+
+            byte[] digital_signature = rsa.SignHash(hash_value, CryptoConfig.MapNameToOID("SHA256"));//Create Signature Value From Previously Calculate Hash Value
+            String hex_encoded_digital_signature = BitConverter.ToString(digital_signature);
+            Console.WriteLine("Digital Signature (SHA256/RSA Byte Array): [{0}]", string.Join(", ", digital_signature));
+            Console.WriteLine("Digital Signature (SHA256/RSA Hexadecimal Encoded String): " + hex_encoded_digital_signature);
+            Console.WriteLine("Hash String: " + Convert.ToBase64String(digital_signature));
+            Console.WriteLine("");
+
+            //Verify Digital Signature
+
+            bool valid_signature = rsa.VerifyHash(hash_value, CryptoConfig.MapNameToOID("SHA256"), digital_signature);//Given The Signature Value And A Reference Hash Value, Verify That The Signature Is Valid.
+            Console.WriteLine("Result of Digital Signature Verification: " + valid_signature);
+            Console.WriteLine("");
+
+            Console.ReadLine();
+
+        }
+
+        static void RSATest2() {
+
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();//RSA Object Used To Create And Verify Digital Signatures
+
+            //Data To Be Signed
+
+            string text = "Hello World";
+            byte[] data = Encoding.ASCII.GetBytes(text);
+            Console.WriteLine("Data (ASCII Encoded Text): " + text);
+            Console.WriteLine("Data (ASCII Encoded Byte Array): [{0}]", string.Join(", ", data));
+            Console.WriteLine("");
+
+            //Calculate Digital Signature
+
+            byte[] digital_signature = rsa.SignData(data, CryptoConfig.MapNameToOID("SHA256"));//Calculate The SHA256 Hash Value Of The Data Contained Within The 'data' Byte Array And Sign The Result Using The Private Key Contained Within The rsa Object.
+            String hex_encoded_digital_signature = BitConverter.ToString(digital_signature);
+            Console.WriteLine("Digital Signature (SHA256/RSA Byte Array): [{0}]", string.Join(", ", digital_signature));
+            Console.WriteLine("Digital Signature (SHA256/RSA Hexadecimal Encoded String): " + hex_encoded_digital_signature);
+            Console.WriteLine("");
+
+            //Verify Digital Signature
+
+            bool valid_signature = rsa.VerifyData(data, CryptoConfig.MapNameToOID("SHA256"), digital_signature);//Calculate The SHA256 Hash Value Of The Data Contained Within The 'data' Byte Array And Compare It To The Value Obtained By Decrypting The 'digital_signature' Byte Arrau Using The Public Key Contained Within The rsa Object. true => Valid Digital Signature.
+            Console.WriteLine("Result of Digital Signature Verification: " + valid_signature);
+            Console.WriteLine("");
+
+            Console.ReadLine();
+
+        }
+        //static void Test(string s, string p) {
+        //    //byte[] bytes;
+        //    //using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256)) {
+        //    //    bytes = deriveBytes.GetBytes(PBKDF2SubkeyLength);
+        //    //}
+
+        //    //var salt = PBKDF2.GenerateSalt();
+        //    var salt = Encoding.ASCII.GetBytes(s);
+        //    //Console.WriteLine(Convert.ToBase64String(salt));
+
+        //    var hashedPassword = PBKDF2.HashPassword(Encoding.UTF8.GetBytes(p), salt, 50000);
+
+        //    Console.WriteLine("Hashed Password is {0}", Convert.ToBase64String(hashedPassword));
+        //}
+
+        //static void Test2() {
+        //    //byte[] bytes;
+        //    //using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256)) {
+        //    //    bytes = deriveBytes.GetBytes(PBKDF2SubkeyLength);
+        //    //}
+
+        //    var salt = PBKDF2.GenerateSalt();
+        //    //var salt = Encoding.ASCII.GetBytes("9QBqhZg8tzzolzqc0ydQhRhjG+JDqaXBVSqittmX/Og=");
+        //    //var salt = Encoding.ASCII.GetBytes(s);
+
+        //    string saltString = Convert.ToBase64String(salt);
+        //    Console.WriteLine(1);
+        //    Console.WriteLine(saltString);
+
+        //    byte[] saltTemp = Encoding.ASCII.GetBytes(saltString);
+
+        //    //Console.WriteLine();
+
+        //    saltString = Convert.ToBase64String(saltTemp);
+        //    Console.WriteLine(2);
+        //    Console.WriteLine(saltString);
+
+        //    saltTemp = Encoding.ASCII.GetBytes(saltString);
+
+        //    //Console.WriteLine();
+
+        //    saltString = Convert.ToBase64String(saltTemp);
+        //    Console.WriteLine(3);
+        //    Console.WriteLine(saltString);
+
+
+
+        //    var hashedPassword = PBKDF2.HashPassword(Encoding.UTF8.GetBytes("hello123"), salt, 50000);
+
+        //    Console.WriteLine("Hashed Password is {0}", Convert.ToBase64String(hashedPassword));
+        //}
 
         static void Generate() {
             //Generate a public/private key pair.  

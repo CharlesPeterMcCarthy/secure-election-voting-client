@@ -42,7 +42,6 @@ namespace ElectionVote.Services.Actions {
                 GetUserResponseDto repsonseObj = JsonConvert.DeserializeObject<GetUserResponseDto>(response);
 
                 if (!repsonseObj.Success) throw new Exception("Failed to create user");
-                //else Console.WriteLine("Unable to find user / login");
 
                 return repsonseObj.User;
             } catch (Exception e) {
